@@ -43,7 +43,6 @@ public class InternetConnection{
     private String TokenInfoURL;
     private Thread p;
     
-    
     public boolean apiKeySupplied;
     
     /*
