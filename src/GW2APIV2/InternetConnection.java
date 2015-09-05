@@ -7,11 +7,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.awt.Image;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -19,44 +16,31 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.SecureRandom;
-import java.security.cert.Certificate;
-import java.security.KeyPairGenerator;
 import java.security.KeyStore;
-import java.security.cert.CertificateFactory;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
 
 /**
  * Created by Zach McNulty on 6/21/2015.
  */
 public class InternetConnection{
 
-    private BufferedReader br;
+
     private GW2Parser parser;
     private JSONParser JsonParser;
     private JSONObject obj;
     private JSONArray jArray;
     private JSONAware jAware;
-    private KeyStore.Builder build;
     private KeyStore ks;
-    private Logger LOGGER;
     private HttpsURLConnection urlConnection;
     private SSLContext SocketFactory;
-    private String algorithm;
     private String AuthToken;
     private String apiKey;
     private String itemURL;
     private String TokenInfoURL;
-    private TrustManagerFactory tmf;
     private Thread p;
     
     
