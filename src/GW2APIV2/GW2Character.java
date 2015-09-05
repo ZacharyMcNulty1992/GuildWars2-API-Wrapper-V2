@@ -12,7 +12,7 @@ public class GW2Character {
 	public String name;
 	public String race;
 	public String gender;
-	public String profession;
+	public String profession; //the class of the character ie: Elementalist
 	public Long level;
 	public String guild;//guilds this character is apart of
 	public String creation_time;// date and time of creation of character
