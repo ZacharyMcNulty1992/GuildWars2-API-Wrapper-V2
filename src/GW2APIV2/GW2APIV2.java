@@ -7,9 +7,7 @@ import org.json.simple.parser.ParseException;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.net.URL;
 
 /**
