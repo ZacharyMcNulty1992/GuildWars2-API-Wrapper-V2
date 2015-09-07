@@ -31,38 +31,6 @@ public class GW2Item {
     private List<String> restrictions;
     
     
-    private Map details; //specific item types and other properties show up in this map
-    private Map infusion_slots;
-    private Map infix_upgrade;
-    private Long suffix_item_id;
-    private String secondary_suffix_item_id;
-    private String secondaryDescription;
-    
-    /*
-     * Armor and Back properties
-     */
-    private String weight_class;
-    private Long defense;
- 
-    /*
-     * Salvage Kits variables
-     */
-    private Long charges;
-    
-    /*
-     * Upgrade Component variables
-     */
-    private List<String> componentOf; // a list of item types that this upgrade component would be useable for
-    private List<String> infusion_upgrade_flags;//applicable infusion slot for infuaion upgrades
-    private String suffix; //what would be appended to the name of an item if it is applied
-    private Map secondary_infix_upgrade;//bonuses the upgrade component grants
-    private List<String> attributes; //not yet implemented in the game // therefore this is only a place holder for a later update
-    private Map buff; //in the secondary infix upgrade ////// this holes information about the upgrades effects
-    private String skill_id; //in the buff map ///// id of the skill
-    private List<String> bonuses;
-    
-    
-    
 
     //takes an object supplied to the child and populates common variables
     public GW2Item(JSONObject o){
@@ -91,35 +59,8 @@ public class GW2Item {
              * decission structure to fill the proper variables with the proper data depending on the item type
              */
 
-            if(type == "Tool"){ //these are for salvage kits
-            	secondaryType = (String) details.get("type");
-            	charges = (Long) details.get("charges");
-            }
-            else if(type == "Trinket"){
-            	secondaryType = (String) details.get("type");
-            	infusion_slots = (Map) details.get("infusion_slots");
-            	infix_upgrade = (Map) details.get("infix_upgrade");
-            	suffix_item_id = (Long) details.get("suffix_item_id");
-            	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
-            }
-            else if(type == "UpgradeComponent"){
-            	secondaryType = (String) details.get("type");
-            	componentOf = (List) details.get("flags");
-            	infusion_upgrade_flags = (List) details.get("infusion_upgrade_flags");
-            	suffix = (String) details.get("suffix");
-            	secondary_infix_upgrade = (Map) details.get("infix_upgrade");
-            	
-            	//runes do not have a buff property
-            	if(secondaryType != "rune")
-            		buff = (Map) secondary_infix_upgrade.get("buff");
-            	
-            	skill_id = (String) buff.get("skill_id");
-            	secondaryDescription = (String) buff.get("description");
-            	
-            	//only runes have this property
-            	if(secondaryType == "Rune")
-            		bonuses = (List) details.get("bonuses");
-            }
+            if(type == "UpgradeComponent"){
+            	}
             else if(type == "Weapon"){
             	 }
             
