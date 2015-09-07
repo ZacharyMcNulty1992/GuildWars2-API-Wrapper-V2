@@ -4,12 +4,13 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import GW2APIV2.Items.GW2Item;
+import GW2APIV2.Items.*;
 
 import java.awt.Image;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.net.URL;
 
 /**
@@ -139,12 +140,54 @@ public class GW2APIV2 {
         try {
             URL u = new URL(UpdatedURL);
             JSONObject o = ic.getJsonObj(u);
-            GW2Item g = new GW2Item(o);
+            
+            String type = (String) o.get("type");
+            
+            GW2Item g = null;
+            
+            switch(type){
+            
+            	case "Armor" : g = new GW2Armor(o);
+            			   	   break;
+            	case "Back" : g = new GW2Back(o);
+            			   	  break;
+            	case "Bag" : g = new GW2Bag(o);
+            				 break;
+            	case "Consumable" : g = new GW2Consumable(o);
+            						break;
+            	case "Container" : g = new GW2Container(o);
+            					   break;
+            	case "CraftingMaterial" : g = new GW2Item(o);
+            							  break;
+            	case "Gathering" : g = new GW2Gathering(o);
+            					   break;
+            	case "Gizmo" : g = new GW2Gizmo(o);
+            				   break;
+            	case "MiniPet" : g = new GW2Item(o);
+            					 break;
+            	case "Tool" : g = new GW2SalvageKit(o);
+            				  break;
+            	case "Trait" : g = new GW2Item(o);
+            				   break;
+            	case "Trinket" : g = new GW2Trinket(o);
+            					 break;
+            	case "UpgradeComponent" : Map details = (Map) o.get("details");
+            							  String secondaryType = (String) details.get("type");
+            							  if(secondaryType.equals("Rune"))
+            								  g = new GW2Rune(o);
+            							  else
+            								  g = new GW2UpgradeComponent(o);
+            							  break;
+            	case "weapon" : g = new GW2Weapon(o);
+            					break;
+            	default : break;
+            }
+            
             return g;
         }catch(MalformedURLException e){
             e.printStackTrace();
         }
-        return null; //stub
+        return null;
     }
 
     /*

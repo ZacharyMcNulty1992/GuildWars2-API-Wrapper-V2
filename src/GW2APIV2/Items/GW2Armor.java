@@ -9,8 +9,8 @@ public class GW2Armor extends GW2Item {
 	
 		
 		private Map details;
-	 	private List<JSONObject> infusion_slots;
-	    private List<JSONObject> infix_upgrade;
+	 	private List<GW2InfusionSlot> infusion_slots;
+	    private GW2InfixUpgrade infix_upgrade;
 	    private Long suffix_item_id;
 	    private Long defense;
 	    private String secondaryType;
@@ -28,8 +28,12 @@ public class GW2Armor extends GW2Item {
 		secondaryType = (String) details.get("type");
     	weight_class = (String) details.get("weight_class");
     	defense = (Long) details.get("defense");
-    	infusion_slots = (List) details.get("infusion_slots");
-    	infix_upgrade = (List) details.get("infix_upgrade");
+    	List<JSONObject> is = (List) details.get("infusion_slots");
+    	for(JSONObject a : is){
+    		infusion_slots.add(new GW2InfusionSlot(a));
+    	}
+    	JSONObject iu = (JSONObject) details.get("infix_upgrade");
+    	infix_upgrade = new GW2InfixUpgrade(iu);
     	suffix_item_id = (Long) details.get("suffix_item_id");
     	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
         
@@ -38,11 +42,11 @@ public class GW2Armor extends GW2Item {
 	/***********
 	 * Getters *
 	 ***********/
-	public List<JSONObject> getInfusionSlots(){
+	public List<GW2InfusionSlot> getInfusionSlots(){
 		return infusion_slots;
 	}
 	
-	public List<JSONObject> getInfixUpgrade(){
+	public GW2InfixUpgrade getInfixUpgrade(){
 		return infix_upgrade;
 	}
 	

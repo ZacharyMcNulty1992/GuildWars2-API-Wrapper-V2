@@ -75,4 +75,8 @@ public class GW2Consumable extends GW2Item{
 	public Long getRecipeId(){
 		return recipe_id;
 	}
+	
+	public Long getDuration(){
+		return duration;
+	}
 }

@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 public class GW2UpgradeComponent extends GW2Item{
 	
 	//not returned
+	//secondary_infix_upgrade will need to be changed when data is added to its attributes field
     private Map secondary_infix_upgrade;//bonuses the upgrade component grants
     private Map buff; //in the secondary infix upgrade ////// this holes information about the upgrades effects
     protected Map details; //protected here to give access to this variable to the child class
@@ -15,7 +16,7 @@ public class GW2UpgradeComponent extends GW2Item{
 	
 	//returned variables
 	private List<String> componentOf; // a list of item types that this upgrade component would be useable for
-    private List<String> infusion_upgrade_flags;//applicable infusion slot for infuaion upgrades
+    private List<String> infusion_upgrade_flags;//applicable infusion slot for infusion upgrades
     private List<String> attributes; //not yet implemented in the game // therefore this is only a place holder for a later update
     
     private String skill_id; //in the buff map ///// id of the skill
