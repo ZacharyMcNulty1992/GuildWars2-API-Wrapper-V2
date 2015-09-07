@@ -3,7 +3,6 @@ package GW2APIV2.Items;
 import org.json.simple.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by zach on 6/17/2015.
@@ -18,9 +17,6 @@ public class GW2Item {
     private String iconURL;
     private String description;
     private String type;
-    
-    private String secondaryType;
-    
     private String rarity;
     private Long id;
     private Long level;
@@ -48,21 +44,6 @@ public class GW2Item {
             flags = (List)  o.get("flags");
             game_types = (List)  o.get("game_types");
             restrictions = (List) o.get("restrictions");
-            
-            //used to get the other variables for specific item types
-            //there is no get for this variable
-            
-            //details = (Map) o.get("details"); 
-            
-            
-            /*
-             * decission structure to fill the proper variables with the proper data depending on the item type
-             */
-
-            if(type == "UpgradeComponent"){
-            	}
-            else if(type == "Weapon"){
-            	 }
             
         }catch(Exception e){
             e.printStackTrace();
