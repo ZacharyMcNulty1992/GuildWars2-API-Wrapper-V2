@@ -44,21 +44,10 @@ public class GW2Item {
     private String weight_class;
     private Long defense;
     
-    
-    
-    /*
-     * Bag properties
-     */
-    private Long size; //number of bag slots
-    private boolean no_sell_or_sort; //true if the bag hides items from merchants when selling items
-    
     /*
      * Consumable properties
      */
-    private Long duration; //measured in miliseconds
-    private String unlock_type; //if the consumable unlocks something it is listed here
-    private Long color_id; //used for dyes, this represents the color that is unlocked by the dye
-    private Long recipe_id;
+    
     
     
     /*
@@ -108,25 +97,10 @@ public class GW2Item {
              * decission structure to fill the proper variables with the proper data depending on the item type
              */
 
-            if(type == "Back"){
-            	infusion_slots = (Map) details.get("infusion_slots");
-            	infix_upgrade = (Map) details.get("infix_upgrade");
-            	suffix_item_id = (Long) details.get("suffix_item_id");
-            	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
-            }
-            else if(type == "Bag"){
-            	size = (Long) details.get("size");
-            	no_sell_or_sort = (boolean) details.get("no_sell_or_sort");
-            }
-            else if(type == "Consumable"){
-            	secondaryType = (String) details.get("type");
-            	secondaryDescription = (String) details.get("description");
-            	duration = (Long) details.get("duration_ms");
-            	unlock_type = (String) details.get("unlock_type");
-            	color_id = (Long) details.get("color_id");
-            	recipe_id = (Long) details.get("recipe_id");
-            }
-            else if(type == "Container"){
+            
+           
+           
+            if(type == "Container"){
             	secondaryType = (String) details.get("type");
             }
             else if(type == "Gathering"){

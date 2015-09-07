@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.Items;
 
 import java.util.HashMap;
 import java.util.List;
