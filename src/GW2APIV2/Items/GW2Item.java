@@ -43,13 +43,7 @@ public class GW2Item {
      */
     private String weight_class;
     private Long defense;
-    
-    /*
-     * Consumable properties
-     */
-    
-    
-    
+ 
     /*
      * Salvage Kits variables
      */
@@ -97,19 +91,7 @@ public class GW2Item {
              * decission structure to fill the proper variables with the proper data depending on the item type
              */
 
-            
-           
-           
-            if(type == "Container"){
-            	secondaryType = (String) details.get("type");
-            }
-            else if(type == "Gathering"){
-            	secondaryType = (String) details.get("type");
-            }
-            else if(type == "Gizmo"){
-            	secondaryType = (String) details.get("type");
-            }
-            else if(type == "Tool"){ //these are for salvage kits
+            if(type == "Tool"){ //these are for salvage kits
             	secondaryType = (String) details.get("type");
             	charges = (Long) details.get("charges");
             }
