@@ -7,6 +7,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import GW2APIV2.Items.GW2Item;
+
 public class GW2Character {
 	
 	public String name;
