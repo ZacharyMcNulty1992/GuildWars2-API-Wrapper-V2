@@ -171,6 +171,8 @@ public class GW2APIV2 {
             				   break;
             	case "Trinket" : g = new GW2Trinket(o);
             					 break;
+            	case "Trophy" : g = new GW2Item(o);
+            					break;
             	case "UpgradeComponent" : Map details = (Map) o.get("details");
             							  String secondaryType = (String) details.get("type");
             							  if(secondaryType.equals("Rune"))
