@@ -1,4 +1,4 @@
-package GW2APIV2.Account;
+package GW2APIV2.Account.Trait;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package GW2APIV2.Account;
+package GW2APIV2.Account.Trait;
 
 import java.util.List;
 
@@ -13,14 +13,8 @@ public class GW2Trait {
 	public Long tier;
 	public String slot;
 	
-	private List<Long> traitedFacts;
-	public Long reqiresTrait;
-	public Long overides;
-	
-	private List<String> facts;
-	public String factText; //may be null not in all fact objects
-	public String factIconURL; //may be null not in all fact objects
-	public String factType;
+	private List<GW2TraitedFacts> traitedFacts;
+	private List<GW2TraitedFacts> facts;
 	
 	public List<GW2TraitSkill> skill; // list of skills triggered by this trait / may be null
 	
@@ -33,6 +27,16 @@ public class GW2Trait {
 		tier = (Long) o.get("tier");
 		slot = (String) o.get("slot");
 		
+		List<JSONObject> TF = (List) o.get("traited_fects");
+		List<JSONObject> F = (List) o.get("facts");
 		
+		
+		for(JSONObject a : TF){
+			traitedFacts.add(new GW2TraitedFacts(a));
+		}
+		
+		for(JSONObject a : F){
+			facts.add(new GW2TraitedFacts(a));
+		}
 	}
 }
