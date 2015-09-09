@@ -6,6 +6,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import GW2APIV2.TradingPost.GW2Transaction;
+
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,6 +21,7 @@ import java.security.SecureRandom;
 import java.security.KeyStore;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;

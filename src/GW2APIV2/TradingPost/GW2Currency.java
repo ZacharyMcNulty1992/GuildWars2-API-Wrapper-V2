@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.TradingPost;
 
 public class GW2Currency {
 	public int Gold;

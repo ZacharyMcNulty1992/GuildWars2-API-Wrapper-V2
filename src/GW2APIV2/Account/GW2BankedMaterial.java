@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.Account;
 
 import org.json.simple.JSONObject;
 

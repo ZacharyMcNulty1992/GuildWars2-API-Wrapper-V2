@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.TradingPost;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.TradingPost;
 
 import org.json.simple.JSONObject;
 

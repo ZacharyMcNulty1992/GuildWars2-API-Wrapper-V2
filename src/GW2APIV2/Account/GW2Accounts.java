@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.Account;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

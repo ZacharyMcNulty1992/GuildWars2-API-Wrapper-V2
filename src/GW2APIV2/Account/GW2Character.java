@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.Account;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import GW2APIV2.InternetConnection;
 import GW2APIV2.Items.GW2Item;
 
 public class GW2Character {

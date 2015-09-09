@@ -1,4 +1,4 @@
-package GW2APIV2;
+package GW2APIV2.TradingPost;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import GW2APIV2.InternetConnection;
 
 public class GW2TradingPost {
 

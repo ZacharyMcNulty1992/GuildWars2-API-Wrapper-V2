@@ -4,7 +4,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import GW2APIV2.Account.GW2Accounts;
 import GW2APIV2.Items.*;
+import GW2APIV2.TradingPost.GW2TradingPost;
 
 import java.awt.Image;
 import java.io.IOException;
