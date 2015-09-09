@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import GW2APIV2.Account.Trait.GW2Trait;
 import GW2APIV2.TradingPost.GW2Transaction;
 
 import java.awt.Image;
@@ -42,6 +43,7 @@ public class InternetConnection{
     private SSLContext SocketFactory;
     private String AuthToken;
     private String apiKey;
+    private String baseURL;
     private String itemURL;
     private String TokenInfoURL;
     private Thread p;
@@ -60,7 +62,8 @@ public class InternetConnection{
         initConnection();
         
         //init variables
-        itemURL = "https://api.guildwars2.com/v2/items";
+        baseURL = "https://api.guildwars2.com/v2/";
+        itemURL = baseURL +"items";
 		TokenInfoURL = null;
         
         JsonParser = new JSONParser();
@@ -81,8 +84,8 @@ public class InternetConnection{
         initConnection(); 
         
         //init variables
-        itemURL = "https://api.guildwars2.com/v2/items";
-		TokenInfoURL = "https://api.guildwars2.com/v2/tokeninfo";
+        itemURL = baseURL + "items";
+		TokenInfoURL = baseURL + "tokeninfo";
         
         JsonParser = new JSONParser();
     }
@@ -318,5 +321,22 @@ public class InternetConnection{
 		}
     	
     	return null;
-    }  
+    }
+    
+    public GW2Trait getTrait(Long id) {
+		try{
+			
+			URL traitURL = new URL(baseURL + "traits/" + id);
+			
+			GW2Trait x = new GW2Trait(getJsonObj(traitURL));
+			
+			return x;
+ 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+    
 }
