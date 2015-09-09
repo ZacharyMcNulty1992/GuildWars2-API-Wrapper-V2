@@ -29,7 +29,7 @@ public class GW2Character {
 	protected boolean bp;
 	
 	
-	public GW2Character(String name, String apiKey, boolean bagPermission){
+	public GW2Character(String name, String apiKey, boolean bagPermission, boolean build){
 		this.name = name;
 		standardURL = "https://api.guildwars2.com/v2/characters";
 		bp = bagPermission;

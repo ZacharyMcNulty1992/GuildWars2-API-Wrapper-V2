@@ -144,7 +144,7 @@ public class GW2Accounts {
 		
 		for(String c : b){
 			if(c != null)
-				characterMap.put(c, new GW2Character(c, this.apiKey, inventoryPermission));
+				characterMap.put(c, new GW2Character(c, this.apiKey, inventoryPermission, buildsPermission));
 			
 		}
 	}
@@ -204,7 +204,5 @@ public class GW2Accounts {
 	public Long getWorld(){
 		return world;
 	}
-	
-	
 	
 }

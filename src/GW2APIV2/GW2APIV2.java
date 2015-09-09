@@ -136,9 +136,6 @@ public class GW2APIV2 {
     		if(a.pvpPermission){
     			
     		}
-    		if(a.buildsPermission){ 
-    			//move to creating the characters it would be better there as this is the build that each character is using
-    		}
 
     		return a;
     		
