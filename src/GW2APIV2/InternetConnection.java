@@ -318,37 +318,5 @@ public class InternetConnection{
 		}
     	
     	return null;
-    }
-    
-    
-    //possibly remove
-    public int getResponseCode(URL u){
-    	try{
-    		
-    		urlConnection = (HttpsURLConnection) u.openConnection();
-    		
-    		int statusCode = urlConnection.getResponseCode();
-    		
-    		return statusCode;
-    		
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	
-    	return 0;
-    }
-    
-    
-    /************************
-     * Trading Post Methods *
-     ************************/
-    /*
-     * Params: option1 = current or history, option2 = buy or sell  
-     * returns: a transaction object
-     */
-    
-    public GW2Transaction getTransaction(String option1, String option2){
-		return null; //stubb
-    }
-    
+    }  
 }

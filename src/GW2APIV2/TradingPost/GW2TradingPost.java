@@ -45,6 +45,35 @@ public class GW2TradingPost {
 	 *  Public Methods *
 	 *******************/
 	
+	/*
+	 * convertGoldToInt
+	 * Params: an int for gold, silver, and copper
+	 * returns: the int value of the amount of gold that was passed
+	 */
+	
+	public int convertGoldToInt(int g, int s, int c){
+		
+		int m = 0;
+		
+		//gold
+		while((m-10000) > 0){
+			g--;
+			m += 10000;
+		}
+		
+		//silver
+		while((m - 100) > 0){
+			s--;
+			m += 100;
+		}
+		
+		//copper
+		while((m-1) > 0){
+			c--;
+			m += 1;
+		}
+		return m;
+	}
 	
 	/*
 	 * GoldToInteger
