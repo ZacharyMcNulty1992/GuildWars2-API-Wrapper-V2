@@ -10,6 +10,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import GW2APIV2.TradingPost.GW2Currency;
+
 public class GW2Accounts {
 	/*
 	 * API Key Variables
@@ -23,6 +25,9 @@ public class GW2Accounts {
 	public boolean tradingPostPermission;
 	public boolean walletPermission;
 	public boolean unlocksPermission;
+	public boolean pvpPermission;
+	public boolean buildsPermission;
+	
 	
 	/*
 	 * Account Variables
@@ -49,7 +54,10 @@ public class GW2Accounts {
 	 */
 	private List<GW2BankedMaterial> materials;
 	
-	
+	/*
+	 * Wallet variables
+	 */
+	private List<GW2Currency> wallet;
 	
 	/*
 	 * Constructor
@@ -62,6 +70,10 @@ public class GW2Accounts {
 		inventoryPermission = false;
 		charactersPermission = false;
 		tradingPostPermission = false;
+		walletPermission = false;
+		unlocksPermission = false;
+		pvpPermission = false;
+		buildsPermission = false;
 		
 		this.apiKey = apiKey;	
 	}
@@ -81,6 +93,18 @@ public class GW2Accounts {
 			}
 			if(ja.contains("tradingpost")){
 				tradingPostPermission = true;
+			}
+			if(ja.contains("wallet")){
+				walletPermission = true;
+			}
+			if(ja.contains("unlocks")){
+				unlocksPermission = true;
+			}
+			if(ja.contains("pvp")){
+				pvpPermission = true;
+			}
+			if(ja.contains("builds")){
+				buildsPermission = true;
 			}
 			
 		}catch(Exception e){
@@ -116,7 +140,7 @@ public class GW2Accounts {
 	public void supplyCharacterList(JSONArray a){
 		List<String> b = (List) a;
 		
-		characterMap = new HashMap();
+		characterMap = new HashMap<String, GW2Character>();
 		
 		for(String c : b){
 			if(c != null)
@@ -148,6 +172,11 @@ public class GW2Accounts {
 		}
 	}
 	
+	public void supplyWallet(List<GW2Currency> a){
+		wallet = a;
+	}
+	
+	
 	/*
 	 * getters
 	 */
@@ -164,6 +193,10 @@ public class GW2Accounts {
 		return materials;
 	}
 	
+	public List getWallet(){
+		return wallet;
+	}
+	
 	public HashMap getCharacters(){
 		return characterMap;
 	}
@@ -171,6 +204,7 @@ public class GW2Accounts {
 	public Long getWorld(){
 		return world;
 	}
+	
 	
 	
 }

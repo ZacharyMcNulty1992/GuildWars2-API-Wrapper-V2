@@ -6,12 +6,15 @@ import org.json.simple.parser.ParseException;
 
 import GW2APIV2.Account.GW2Accounts;
 import GW2APIV2.Items.*;
+import GW2APIV2.TradingPost.GW2Currency;
 import GW2APIV2.TradingPost.GW2TradingPost;
 
 import java.awt.Image;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.net.URL;
 
@@ -87,7 +90,7 @@ public class GW2APIV2 {
     		JSONObject accountTokenObject = ic.getJsonObj(u);
     		JSONObject accountDetails = ic.getJsonObj(accDetails);
     		
-    		
+    		//this permission is always true with valid api-keys
     		a.supplyAccountTokenInfo(accountTokenObject);
     		a.supplyAccountDetails(accountDetails);
     		
@@ -107,10 +110,36 @@ public class GW2APIV2 {
     			a.supplyMaterialsBank(matsList);
     		}
     		if(a.walletPermission){
-    			URL waletDetails = new URL("https://api.guildwars2.com/v2/account/wallet");
+    			URL walletDetails = new URL("https://api.guildwars2.com/v2/account/wallet");
+    			
+    			String money = "https://api.guildwars2.com/v2/currencies";
+    			URL moneyURL;
+    			
+    			List<JSONObject> walletList = (List) ic.getJsonArray(walletDetails);
+    			List<GW2Currency> wallet = new ArrayList<GW2Currency>();
+    			
+    			//initalize the currencies for the account associated with the apiKey
+    			for(JSONObject b : walletList){
+    				money = money + b.get("id");
+    				moneyURL = new URL(money);
+    				JSONObject x = ic.getJsonObj(moneyURL);
+    				
+    				wallet.add(new GW2Currency(x, (Long) b.get("value")));
+    			}
+    			
+    			//supplies the account class the wallet information 
+    			a.supplyWallet(wallet);
     		}
-    		
-    		
+    		if(a.unlocksPermission){
+    			
+    		}
+    		if(a.pvpPermission){
+    			
+    		}
+    		if(a.buildsPermission){ 
+    			//move to creating the characters it would be better there as this is the build that each character is using
+    		}
+
     		return a;
     		
     	}catch(Exception e){
