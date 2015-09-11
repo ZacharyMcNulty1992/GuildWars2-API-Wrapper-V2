@@ -84,6 +84,7 @@ public class InternetConnection{
         initConnection(); 
         
         //init variables
+        baseURL = "https://api.guildwars2.com/v2/";
         itemURL = baseURL + "items";
 		TokenInfoURL = baseURL + "tokeninfo";
         
