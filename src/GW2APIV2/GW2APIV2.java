@@ -112,7 +112,7 @@ public class GW2APIV2 {
     		if(a.walletPermission){
     			URL walletDetails = new URL("https://api.guildwars2.com/v2/account/wallet");
     			
-    			String money = "https://api.guildwars2.com/v2/currencies";
+    			String money = "https://api.guildwars2.com/v2/currencies/";
     			URL moneyURL;
     			
     			List<JSONObject> walletList = (List) ic.getJsonArray(walletDetails);
@@ -120,15 +120,17 @@ public class GW2APIV2 {
     			
     			//initalize the currencies for the account associated with the apiKey
     			for(JSONObject b : walletList){
-    				money = money + b.get("id");
+    				money = "https://api.guildwars2.com/v2/currencies/" + b.get("id");
     				moneyURL = new URL(money);
     				JSONObject x = ic.getJsonObj(moneyURL);
     				
     				wallet.add(new GW2Currency(x, (Long) b.get("value")));
+    				
     			}
-    			
+
     			//supplies the account class the wallet information 
     			a.supplyWallet(wallet);
+
     		}
     		if(a.unlocksPermission){
     			
@@ -136,7 +138,7 @@ public class GW2APIV2 {
     		if(a.pvpPermission){
     			
     		}
-
+    		
     		return a;
     		
     	}catch(Exception e){
