@@ -71,7 +71,7 @@ public class GW2Parser extends Thread {
 			//System.out.println("adding names of page " + currentIndex);
 			for(int i = count; i < o.size(); i++){
 				
-				id = (Long) o.get(i).get("id");
+				id = (Long) (o.get(i)).get("id");
 				
 				MON.put((Integer) id.intValue(), (String) o.get(i).get("name"));
 				
