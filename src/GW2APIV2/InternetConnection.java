@@ -6,9 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import GW2APIV2.Account.Trait.GW2Trait;
-import GW2APIV2.TradingPost.GW2Transaction;
-
+import GW2APIV2.Account.GW2Trait;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
