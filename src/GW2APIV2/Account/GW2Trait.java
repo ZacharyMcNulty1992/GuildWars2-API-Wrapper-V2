@@ -37,8 +37,17 @@ public class GW2Trait {
 		tier = (Long) o.get("tier");
 		slot = (String) o.get("slot");
 		
+		//temporary variables to hold JSONObjects of the Facts and Traited Facts objects 
 		List<JSONObject> TF = (List) o.get("traited_fects");
 		List<JSONObject> F = (List) o.get("facts");
+		
+		//temporary variavle to hold JSONObjects returned from the object o
+		List<JSONObject> sk = (List) o.get("skills");
+		
+		//adds all skills that were retrieved from 
+		for(JSONObject a : sk){
+			skill.add(new GW2TraitSkill(a));
+		}
 		
 		String type = "";
 		
@@ -49,6 +58,7 @@ public class GW2Trait {
 			
 			
 			//this switch is for each different subclass of the traitedFacts object
+			//it adds the correct type of Traited fact or fact to the appropriate List
 			//if a type is not found this will throw a runtime exception
 			switch(type){
 				case "AttributeAdjust" : traitedFacts.add(new GW2AttributeAdjust(a));

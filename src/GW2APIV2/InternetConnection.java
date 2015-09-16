@@ -293,8 +293,6 @@ public class InternetConnection{
     	return null;
     }
     
-    
-    
     /*******************
      * API Key Methods *
      *******************/
