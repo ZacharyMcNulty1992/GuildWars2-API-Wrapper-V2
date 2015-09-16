@@ -4,18 +4,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import GW2APIV2.Account.GW2Accounts;
+import GW2APIV2.Account.*;
 import GW2APIV2.Items.*;
-import GW2APIV2.TradingPost.GW2Currency;
-import GW2APIV2.TradingPost.GW2TradingPost;
+import GW2APIV2.TradingPost.*;
 
 import java.awt.Image;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.net.URL;
 
 /**
@@ -25,11 +21,9 @@ public class GW2APIV2 {
 
 
     //internet connection variables and class instances
-    InternetConnection ic;
-    private Long item_id; //item being searched for if found will have a value if not will be -1
+    private InternetConnection ic; //this class handles all the internet connection related methods
     private String Standard_URL = "https://api.guildwars2.com/v2/"; //the root url to start in v2
-    private boolean apiPosTest;
-    private String apiKey;
+    private String apiKey; //apikey given by the user
     
     /*
      * default Constructor
@@ -39,7 +33,6 @@ public class GW2APIV2 {
      */
     public GW2APIV2(){
         ic = new InternetConnection();
-        apiPosTest = false;
         apiKey = null;
     }
     
@@ -58,10 +51,6 @@ public class GW2APIV2 {
     public GW2APIV2(String apiK)throws RuntimeException{
     	
     	ic = new InternetConnection(apiK);
-    	
-    	System.out.println("created InternetConnection in GW2APIV2");
-    	
-    	apiPosTest = true;
 		apiKey = apiK;
     }
     
@@ -153,6 +142,24 @@ public class GW2APIV2 {
     /******************
      * public methods *
      ******************/
+    
+    /***********
+     * Setters *
+     ***********/
+    
+    /*
+     * setAPIKey
+     * Params: String : a valid api-key
+     * Returns: N/A
+     * NOTE: this will not throw any errors if the api-key is invalid although all objects
+     * 		 that require an api-key will return null
+     */
+    public void setAPIKey(String apiK){
+    	apiKey = apiK;
+    	ic = new InternetConnection(apiKey);
+    }
+    
+    
     
     /*****************
      *  Item Methods *
@@ -250,6 +257,7 @@ public class GW2APIV2 {
     /********************
      *  Account Methods *
      *  API KEY NEEDED  *
+     *  FOR MOST METHODS*
      ********************/
     
     /*
@@ -267,6 +275,11 @@ public class GW2APIV2 {
     	return setUpAccount();
 
     }
+    
+    public GW2Trait getTrait(Long id){
+    	return ic.getTrait(id);
+    }
+    
     
     /*************************
      *  Trading Post Methods *
