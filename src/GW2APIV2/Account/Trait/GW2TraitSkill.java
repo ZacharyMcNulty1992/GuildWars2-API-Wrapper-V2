@@ -12,14 +12,8 @@ public class GW2TraitSkill {
 	public String iconURL;
 	
 	private List<Long> traitedFacts;
-	public Long reqiresTrait;
-	public Long overides;
-	
 	private List<String> facts;
-	public String factText; //may be null not in all fact objects
-	public String factIconURL; //may be null not in all fact objects
-	public String factType;
-	
+
 	public GW2TraitSkill(JSONObject o){
 		
 	}
