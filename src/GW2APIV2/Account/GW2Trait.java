@@ -1,17 +1,20 @@
-package GW2APIV2.Account.Trait;
+package GW2APIV2.Account;
 
 import java.util.List;
 
 import org.json.simple.JSONObject;
 
+import GW2APIV2.Account.Trait.GW2TraitSkill;
+import GW2APIV2.Account.Trait.GW2TraitedFacts;
+
 public class GW2Trait {
 	
-	public Long id;
-	public String name;
-	public String description;
+	public Long id; //id of the trait
+	public String name; //name of the trait
+	public String description; //description of the trait
 	public Long spec_id; //id of the specialization this trait belongs to
-	public Long tier;
-	public String slot;
+	public Long tier; //tier of the trait (ie: Adept, Master, Grandmaster) as a value between 1-3
+	public String slot; //Either major or minor, minor traits are the ones given immediately upon chooseing a specialization
 	
 	private List<GW2TraitedFacts> traitedFacts;
 	private List<GW2TraitedFacts> facts;
@@ -30,7 +33,7 @@ public class GW2Trait {
 		List<JSONObject> TF = (List) o.get("traited_fects");
 		List<JSONObject> F = (List) o.get("facts");
 		
-		
+		//change these to the appropriate sub class type
 		for(JSONObject a : TF){
 			traitedFacts.add(new GW2TraitedFacts(a));
 		}
