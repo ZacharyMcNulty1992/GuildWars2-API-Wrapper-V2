@@ -89,6 +89,8 @@ public class GW2Trait {
 		
 		for(JSONObject a : F){
 			
+			type = (String) a.get("type");
+			
 			switch(type){
 				case "AttributeAdjust" : facts.add(new GW2AttributeAdjust(a));
 										  break;
@@ -126,4 +128,47 @@ public class GW2Trait {
 			}
 		}
 	}
+	
+	/***********
+	 * Getters *
+	 ***********/
+	
+	public Long getId(){
+		return id;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	
+	//this getter returns the specialization id of the specialization that this trait belongs to
+	public Long getSpecializationId(){ 
+		return spec_id;
+	}
+	
+	public Long getTier(){
+		return tier;
+	}
+	
+	public String getSlot(){
+		return slot;
+	}
+	
+	public List<GW2TraitedFacts> getTraitedFacts(){
+		return traitedFacts;
+	}
+	
+	public List<GW2TraitedFacts> getFacts(){
+		return facts;
+	}
+	
+	public List<GW2TraitSkill> getSkills(){
+		return skill;
+	}
+	
 }
