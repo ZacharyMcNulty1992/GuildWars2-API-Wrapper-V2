@@ -59,6 +59,7 @@ public class GW2Trait {
 		String type = "";
 		
 		//change these to the appropriate sub class type
+		if(TF != null)
 		for(JSONObject a : TF){
 			
 			type = (String) a.get("type");
@@ -103,7 +104,11 @@ public class GW2Trait {
 				default : throw new RuntimeException();
 			}
 		}
+		//if the TF object is null then we make the traitedFacts null;
+		else
+			traitedFacts = null;
 		
+		if(F != null)
 		for(JSONObject a : F){
 			
 			type = (String) a.get("type");
@@ -144,6 +149,9 @@ public class GW2Trait {
 				default : throw new RuntimeException();
 			}
 		}
+		//if the F object is null we make the facts object null;
+		else 
+			facts = null;
 	}
 	
 	/***********
