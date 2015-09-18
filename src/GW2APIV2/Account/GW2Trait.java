@@ -54,7 +54,6 @@ public class GW2Trait {
 		//adds all skills that were retrieved from 
 		if(sk != null){
 			for(JSONObject a : sk){
-				System.out.println(a.get("id"));
 				skill.add(new GW2TraitSkill(a));
 			}
 		}
