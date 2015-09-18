@@ -47,10 +47,15 @@ public class GW2Trait {
 		List<JSONObject> sk = (List) o.get("skills");
 		
 		//adds all skills that were retrieved from 
-		for(JSONObject a : sk){
-			skill.add(new GW2TraitSkill(a));
+		if(sk != null){
+			for(JSONObject a : sk){
+				System.out.println(a.get(""));
+				//skill.add(new GW2TraitSkill(a));
+			}
 		}
-		
+		else
+			sk = null;
+			
 		String type = "";
 		
 		//change these to the appropriate sub class type
