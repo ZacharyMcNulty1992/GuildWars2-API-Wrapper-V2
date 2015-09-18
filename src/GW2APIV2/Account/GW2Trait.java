@@ -1,5 +1,6 @@
 package GW2APIV2.Account;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -46,11 +47,15 @@ public class GW2Trait {
 		//temporary variavle to hold JSONObjects returned from the object o
 		List<JSONObject> sk = (List) o.get("skills");
 		
+		traitedFacts = new ArrayList();
+		facts = new ArrayList();
+		skill = new ArrayList();
+		
 		//adds all skills that were retrieved from 
 		if(sk != null){
 			for(JSONObject a : sk){
-				System.out.println(a.get(""));
-				//skill.add(new GW2TraitSkill(a));
+				System.out.println(a.get("id"));
+				skill.add(new GW2TraitSkill(a));
 			}
 		}
 		else

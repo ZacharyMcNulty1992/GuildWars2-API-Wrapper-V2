@@ -1,5 +1,6 @@
 package GW2APIV2.Account.Trait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -21,12 +22,16 @@ public class GW2TraitSkill {
 		description = (String) o.get("description");
 		iconURL = (String) o.get("icon");
 		
+		traitedFacts = new ArrayList();
+		facts = new ArrayList();
+		
 		//temporary variables to hold JSONObjects of the Facts and Traited Facts objects 
 		List<JSONObject> TF = (List) o.get("traited_fects");
 		List<JSONObject> F = (List) o.get("facts");
 		
 		String type = "";
 		
+		if(TF != null)
 		for(JSONObject a : TF){
 			
 			type = (String) a.get("type");
@@ -71,7 +76,10 @@ public class GW2TraitSkill {
 				default : throw new RuntimeException();
 			}
 		}
+		else
+			traitedFacts = null;
 		
+		if(F != null){
 		for(JSONObject a : F){
 			
 			type = (String) a.get("type");
@@ -112,6 +120,9 @@ public class GW2TraitSkill {
 				default : throw new RuntimeException();
 			}
 		}
+		}
+		else
+			facts = null;
 	}
 	
 	
