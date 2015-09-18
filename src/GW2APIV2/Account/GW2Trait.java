@@ -10,6 +10,7 @@ public class GW2Trait {
 	
 	private Long id; //id of the trait
 	private String name; //name of the trait
+	private String icon; //the icon url for the trait
 	private String description; //description of the trait
 	private Long spec_id; //id of the specialization this trait belongs to
 	private Long tier; //tier of the trait (ie: Adept, Master, Grandmaster) as a value between 1-3
@@ -32,6 +33,7 @@ public class GW2Trait {
 		//Initialize variables
 		id = (Long) o.get("id");
 		name = (String) o.get("name");
+		icon = (String) o.get("icon");
 		description = (String) o.get("description");
 		spec_id = (Long) o.get("specialization");
 		tier = (Long) o.get("tier");
@@ -149,6 +151,10 @@ public class GW2Trait {
 	
 	public String getName(){
 		return name;
+	}
+	
+	public String getIcon(){
+		return icon;
 	}
 	
 	public String getDescription(){
