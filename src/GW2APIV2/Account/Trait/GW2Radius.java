@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 public class GW2Radius extends GW2TraitedFacts {
 	
-	public Long distance;
+	private Long distance; 
 	
 	public GW2Radius(JSONObject o){
 		super(o);
@@ -12,4 +12,8 @@ public class GW2Radius extends GW2TraitedFacts {
 		distance = (Long) o.get("distance");
 	}
 
+	public Long getDistance(){
+		return distance;
+	}
+	
 }

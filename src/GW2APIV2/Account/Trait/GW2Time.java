@@ -4,7 +4,7 @@ import org.json.simple.JSONObject;
 
 public class GW2Time extends GW2TraitedFacts {
 
-	public Long duration; //measured in seconds
+	private Long duration; //measured in seconds
 	
 	public GW2Time(JSONObject o) {
 		super(o);
@@ -12,6 +12,8 @@ public class GW2Time extends GW2TraitedFacts {
 		duration = (Long) o.get("duration");
 	}
 	
-	
+	public Long getDuration(){
+		return duration;
+	}
 
 }

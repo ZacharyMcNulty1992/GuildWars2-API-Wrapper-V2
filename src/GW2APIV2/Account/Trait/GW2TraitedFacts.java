@@ -22,4 +22,28 @@ public class GW2TraitedFacts {
 		overrides = (Long) o.get("overrides");
 	}
 	
+	/***********
+	 * Getters *
+	 ***********/
+	
+	public String getText(){
+		return text;
+	}
+	
+	public String getIcon(){
+		return iconURL;
+	}
+	
+	public String getType(){
+		return type;
+	}
+	
+	public Long getRequiredTrait(){
+		return requiresTrait;
+	}
+	
+	public Long getOverrides(){
+		return overrides;
+	}
+	
 }
