@@ -4,9 +4,9 @@ import org.json.simple.JSONObject;
 
 public class GW2TraitedFacts {
 	
-	public String text;
-	public String iconURL;
-	public String type;
+	private String text;
+	private String iconURL;
+	private String type;
 	
 	//only have values if the object is a Traited Facts object, else these will be null
 	public Long requiresTrait;
