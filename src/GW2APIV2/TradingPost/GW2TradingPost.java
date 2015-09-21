@@ -76,37 +76,12 @@ public class GW2TradingPost {
 	}
 	
 	/*
-	 * GoldToInteger
-	 * Params: int: Gold amt, int: Silver amt, int: Copper amt
-	 * Returns: an int that represents the currency amt supplied as an integer
-	 */
-	public int GoldToInteger(int g, int s, int c){
-		
-		int val = 0;
-		
-		for(int x = 0; x < g; x++){
-			val += 10000;
-		}
-		
-		for(int x = 0; x < s; x++){
-			val += 100;
-		}
-		
-		for(int x = 0; x < c; x++){
-			val += 1;
-		}
-
-		return val;
-		
-	}
-	
-	/*
-	 * getBuyInfo
+	 * getHighestBuyListing
 	 * Params: an item id
 	 * Returns: a Listing object with the highest buying price and the amount of the item on the tp
 	 */
 	
-	public GW2Listing getBuyInfo(Long id){
+	public GW2Listing getHighestBuyListing(Long id){
 		
 		try{
 			String URLString = "https://api.guildwars2.com/v2/commerce/prices/";
@@ -126,12 +101,12 @@ public class GW2TradingPost {
 	}
 	
 	/*
-	 * getSellInfo
+	 * getLowestSellListing
 	 * Params: an item id
 	 * Returns: a Listing object with the lowest selling price and the amount of the item on the tp
 	 */
 	
-	public GW2Listing getSellInfo(Long id){
+	public GW2Listing getLowestSellListing(Long id){
 		
 		try{
 			
