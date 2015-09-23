@@ -243,6 +243,27 @@ public class GW2APIV2 {
     }
     
     /*
+     * get200Items
+     * Params: the paging index of the set of 200 items
+     * Returns: a list of 200 items
+     * 
+     * NOTE: this number must be less than 228
+     */
+    
+    public List<GW2Item> get200Items(int val){
+    	
+    	List<GW2Item> itemList = new ArrayList<GW2Item>();
+    	List<JSONObject> a = ic.get200Items(val);
+    	
+    	
+    	for(JSONObject b : a){
+    		itemList.add(getItemDetails((long) b.get("id")));
+    	}
+    	
+    	return itemList;
+    }
+    
+    /*
      * getIcon
      * Params: a valid icon Url in a string format
      * Returns: an image in png format

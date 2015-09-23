@@ -7,6 +7,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import GW2APIV2.Account.GW2Trait;
+import GW2APIV2.Items.GW2Item;
+
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.SecureRandom;
 import java.security.KeyStore;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -257,8 +260,7 @@ public class InternetConnection{
     			
     		}//end of loop
     		
-    	}//catch(MalformedURLException e){
-    	catch(Exception e){
+    	}catch(Exception e){
     		e.printStackTrace();
     	}
     	
@@ -271,6 +273,23 @@ public class InternetConnection{
 		//return the list of names
 		return parser.getMap();
     }
+    
+    public List<JSONObject> get200Items(int index){
+    	
+    	try{
+    		
+    		URL x = new URL(itemURL + "?page=" + index + "&page_size=200");
+    		List<JSONObject> b = (List) getJsonArray(x);
+    		
+    		return b;
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	return null;
+    }
+    
+    
 
     /*
      * Params: a string representation of the icon's URL
