@@ -25,8 +25,6 @@ public class GW2Item {
     private List<String> flags;
     private List<String> game_types;
     private List<String> restrictions;
-    
-    
 
     //takes an object supplied to the child and populates common variables
     public GW2Item(JSONObject o){
@@ -49,8 +47,6 @@ public class GW2Item {
             e.printStackTrace();
         }
     }
-
-
 
     /*
      *  Getters for generic item traits
