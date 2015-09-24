@@ -255,10 +255,15 @@ public class GW2APIV2 {
     	List<GW2Item> itemList = new ArrayList<GW2Item>();
     	List<JSONObject> a = ic.get200Items(val);
     	
+    	int x = 1;
+    	
     	System.out.println("parsing the items");
+    	
     	for(JSONObject b : a){
     		itemList.add(getItemDetails((long) b.get("id")));
-    		System.out.println("parsing item : " + (String) b.get("name") + " ,  item id: " + (long) b.get("id"));
+    		if((x % 10) == 0)
+    			System.out.println("parsing item : " + (String) b.get("name") + " ,  item id: " + (long) b.get("id") + " ,   Item Parsed: " +  x);
+    		x++;
     	}
     	
     	System.out.println("returning the list");
