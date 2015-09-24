@@ -257,13 +257,54 @@ public class GW2APIV2 {
     	
     	int x = 1;
     	
-    	System.out.println("parsing the items");
+    	GW2Item g = null;
     	
-    	for(JSONObject b : a){
-    		itemList.add(getItemDetails((long) b.get("id")));
-    		if((x % 10) == 0)
-    			System.out.println("parsing item : " + (String) b.get("name") + " ,  item id: " + (long) b.get("id") + " ,   Item Parsed: " +  x);
-    		x++;
+    	for(JSONObject o : a){
+    		
+    		 String type = (String) o.get("type");
+    		
+    		 switch(type){
+             
+         	case "Armor" : g = new GW2Armor(o);
+         			   	   break;
+         	case "Back" : g = new GW2Back(o);
+         			   	  break;
+         	case "Bag" : g = new GW2Bag(o);
+         				 break;
+         	case "Consumable" : g = new GW2Consumable(o);
+         						break;
+         	case "Container" : g = new GW2Container(o);
+         					   break;
+         	case "CraftingMaterial" : g = new GW2Item(o);
+         							  break;
+         	case "Gathering" : g = new GW2Gathering(o);
+         					   break;
+         	case "Gizmo" : g = new GW2Gizmo(o);
+         				   break;
+         	case "MiniPet" : g = new GW2Item(o);
+         					 break;
+         	case "Tool" : g = new GW2SalvageKit(o);
+         				  break;
+         	case "Trait" : g = new GW2Item(o);
+         				   break;
+         	case "Trinket" : g = new GW2Trinket(o);
+         					 break;
+         	case "Trophy" : g = new GW2Item(o);
+         					break;
+         	case "UpgradeComponent" : Map details = (Map) o.get("details");
+         							  String secondaryType = (String) details.get("type");
+         							  if(secondaryType.equals("Rune"))
+         								  g = new GW2Rune(o);
+         							  else
+         								  g = new GW2UpgradeComponent(o);
+         							  break;
+         	case "weapon" : g = new GW2Weapon(o);
+         					break;
+         	default : break;
+    		 }
+
+    		itemList.add(g);
+
     	}
     	
     	System.out.println("returning the list");
