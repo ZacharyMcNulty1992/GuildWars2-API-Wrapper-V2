@@ -277,10 +277,12 @@ public class InternetConnection{
     public List<JSONObject> get200Items(int index){
     	
     	try{
-    		
+
+			System.out.println("getting 200 JSONObjects");
     		URL x = new URL(itemURL + "?page=" + index + "&page_size=200");
     		List<JSONObject> b = (List) getJsonArray(x);
     		
+    		System.out.println("returning the list of JSONObjects");
     		return b;
     		
     	}catch(Exception e){
