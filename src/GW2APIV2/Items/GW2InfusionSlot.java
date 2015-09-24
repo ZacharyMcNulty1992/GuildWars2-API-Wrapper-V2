@@ -19,4 +19,15 @@ public class GW2InfusionSlot {
 		itemId = (Long) o.get("item_id");
 	}
 
+	/***********
+	 * Getters *
+	 ***********/
+	
+	public String getFlag(){
+		return flag;
+	}
+	
+	public Long getItemId(){
+		return itemId;
+	}
 }
