@@ -7,21 +7,21 @@ import org.json.simple.JSONObject;
 
 public class GW2Dye {
 
-	public Long id;
-	public String name;
-	public List<Long> BaseRGBValues;
+	private Long id;
+	private String name;
+	private List<Long> BaseRGBValues;
 	
 	//when applied to cloth
-	public HashMap<String, Long> Cloth;
-	public List<Long> clothRGB;
+	private HashMap<String, Long> Cloth;
+	private List<Long> clothRGB;
 	
 	//when applied to leather
-	public HashMap<String, Long> Leather;
-	public List<Long> leatherRGB;
+	private HashMap<String, Long> Leather;
+	private List<Long> leatherRGB;
 	
 	//when applied to metal
-	public HashMap<String, Long> Metal;
-	public List<Long> metalRGB;
+	private HashMap<String, Long> Metal;
+	private List<Long> metalRGB;
 	
 	public GW2Dye(JSONObject a){
 		
@@ -60,4 +60,42 @@ public class GW2Dye {
 		metalRGB = (List) obj.get("rgb");
 	}
 	
+	/***********
+	 * Getters *
+	 ***********/
+	public Long getId(){
+		return id;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public List<Long> getBaseRGB(){
+		return BaseRGBValues;
+	}
+	
+	public HashMap<String, Long> getWhenAppliedToClothMap(){
+		return Cloth;
+	}
+	
+	public List<Long> getClothRGB(){
+		return clothRGB;
+	}
+	
+	public HashMap<String, Long> getWhenAppliedToLeatherMap(){
+		return Leather;
+	}
+	
+	public List<Long> getLeatherRGB(){
+		return leatherRGB;
+	}
+	
+	public HashMap<String, Long> getWhenAppliedToMetalMap(){
+		return Metal;
+	}
+	
+	public List<Long> getMetalRGB(){
+		return metalRGB;
+	}
 }
