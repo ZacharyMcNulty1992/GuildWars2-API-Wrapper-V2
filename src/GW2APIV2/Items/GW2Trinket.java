@@ -33,22 +33,31 @@ public class GW2Trinket extends GW2Item {
     	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
 	}
 	
+	/***********
+	 * Getters *
+	 ***********/
+	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}
 	
+	@Override
 	public List<GW2InfusionSlot> getInfusionSlots(){
 		return infusion_slots;
 	}
 	
+	@Override
 	public GW2InfixUpgrade getInfixUpgrade(){
 		return infix_upgrade;
 	}
 	
+	@Override
 	public String getSecondarySuffixItemId(){
 		return secondary_suffix_item_id;
 	}
 	
+	@Override
 	public Long getSuffixItemId(){
 		return suffix_item_id;
 	}

@@ -17,6 +17,7 @@ public class GW2Gizmo extends GW2Item{
 		secondaryType = (String) details.get("type");
 	}
 	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}

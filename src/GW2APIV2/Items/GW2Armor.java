@@ -42,34 +42,42 @@ public class GW2Armor extends GW2Item {
 	/***********
 	 * Getters *
 	 ***********/
+	@Override
 	public List<GW2InfusionSlot> getInfusionSlots(){
 		return infusion_slots;
 	}
 	
+	@Override
 	public GW2InfixUpgrade getInfixUpgrade(){
 		return infix_upgrade;
 	}
 	
+	@Override
 	public Long getSuffixItemId(){
 		return suffix_item_id;
 	}
 	
+	@Override
 	public Long getDefense(){
 		return defense;
 	}
 	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}
 	
+	@Override
 	public String getSecondaryDescription(){
 		return secondaryDescription;
 	}
 	
+	@Override
 	public String getSecondarySuffixItemId(){
 		return secondary_suffix_item_id;
 	}
 	
+	@Override
 	public String getWeightClass(){
 		return weight_class;
 	}

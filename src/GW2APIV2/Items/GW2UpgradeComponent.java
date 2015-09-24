@@ -52,14 +52,21 @@ public class GW2UpgradeComponent extends GW2Item{
     	}
 	}
 
+	/***********
+	 * Getters *
+	 ***********/
+	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}
 	
+	@Override
 	public List<String> getComponentOf(){
 		return componentOf;
 	}
 	
+	@Override
 	public List<String> getInfusionUpgradeFlags(){
 		return infusion_upgrade_flags;
 	}
@@ -68,18 +75,22 @@ public class GW2UpgradeComponent extends GW2Item{
 	 * getAttributes()
 	 *  this is currently null until heart of thorns XPac
 	 */
+	@Override
 	public List<String> getAttributes(){
 		return attributes;
 	}
 	
+	@Override
 	public String getSkillId(){
 		return skill_id;
 	}
 	
-	public String getSuffic(){
+	@Override
+	public String getSuffix(){
 		return suffix;
 	}
 	
+	@Override
 	public String getSecondaryDescription(){
 		return secondaryDescription;
 	}

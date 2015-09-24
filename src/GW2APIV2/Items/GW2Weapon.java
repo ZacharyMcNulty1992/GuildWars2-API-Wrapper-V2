@@ -49,15 +49,17 @@ public class GW2Weapon extends GW2Item{
 	/***********
 	 * Getters *
 	 ***********/
-	
+	@Override
 	public Long getMinPower(){
 		return min_power;
 	}
 	
+	@Override
 	public Long getMaxPower(){
 		return max_power;
 	}
 	
+	@Override
 	public Long getShieldDefense(){
 		if(secondaryType != "Shield")
 			return null;
@@ -65,30 +67,37 @@ public class GW2Weapon extends GW2Item{
 			return shield_defense;
 	}
 	
+	@Override
 	public Long getSuffixItemId(){
 		return suffix_item_id;
 	}
 	
+	@Override
 	public List<GW2InfusionSlot> getInfusionSlots(){
 		return infusion_slots;
 	}
 	
+	@Override
 	public GW2InfixUpgrade getInfixUpgrade(){
 		return infix_upgrade;
 	}
 	
+	@Override
 	public String getDamageType(){
 		return damage_type;
 	}
 	
+	@Override
 	public String getSecondarySuffixItemId(){
 		return secondary_suffix_item_id;
 	}
 	
+	@Override
 	public String getSecondaryDescription(){
 		return secondaryDescription;
 	}
 	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}

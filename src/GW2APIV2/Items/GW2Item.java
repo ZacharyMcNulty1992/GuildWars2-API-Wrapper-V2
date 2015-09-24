@@ -100,4 +100,112 @@ public class GW2Item {
     public List<String> getRestrictions(){
         return restrictions;
     }
+
+    /*********************
+     * Overriden methods *
+     *********************/
+    
+    /*
+     * these methods are overriden and only return null if the child class does not override them
+     */
+    
+	public GW2InfixUpgrade getInfixUpgrade() {
+		return null;
+	}
+
+	public List<GW2InfusionSlot> getInfusionSlots() {
+		return null;
+	}
+
+	public Long getSuffixItemId() {
+		return null;
+	}
+
+	public Long getDefense() {
+		return null;
+	}
+
+	public String getSecondaryType() {
+		return null;
+	}
+
+	public String getSecondaryDescription() {
+		return null;
+	}
+
+	public String getSecondarySuffixItemId() {
+		return null;
+	}
+
+	public String getWeightClass() {
+		return null;
+	}
+
+	public Long getSize() {
+		return null;
+	}
+
+	public boolean getSellOrSort() {
+		return false;
+	}
+
+	public String getUnlockType() {
+		return null;
+	}
+
+	public Long getColorId() {
+		return null;
+	}
+
+	public Long getRecipeId() {
+		return null;
+	}
+
+	public Long getDuration() {
+		return null;
+	}
+
+	public List<String> getBonuses() {
+		return null;
+	}
+
+	public Long getCharges() {
+		return null;
+	}
+
+	public List<String> getComponentOf() {
+		return null;
+	}
+
+	public List<String> getInfusionUpgradeFlags() {
+		return null;
+	}
+
+	public List<String> getAttributes() {
+		return null;
+	}
+
+	public String getSkillId() {
+		return null;
+	}
+
+	public String getSuffix() {
+		return null;
+	}
+
+	public Long getMinPower() {
+		return null;
+	}
+
+	public Long getMaxPower() {
+		return null;
+	}
+
+	public Long getShieldDefense() {
+		return null;
+	}
+
+	public String getDamageType() {
+		return null;
+	}
 }

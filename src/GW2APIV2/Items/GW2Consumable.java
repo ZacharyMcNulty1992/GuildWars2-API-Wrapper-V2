@@ -32,11 +32,12 @@ public class GW2Consumable extends GW2Item{
 	/***********
 	 * Getters *
 	 ***********/
-	
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}
 	
+	@Override
 	public String getSecondaryDescription(){
 		return secondaryDescription;
 	}
@@ -54,6 +55,7 @@ public class GW2Consumable extends GW2Item{
 	 * Dye - for Dyes 
 	 * Unknown - Outfits
 	 */
+	@Override
 	public String getUnlockType(){
 		return unlock_type;
 	}
@@ -63,6 +65,7 @@ public class GW2Consumable extends GW2Item{
 	 * 
 	 * returns null unless the secondary type is a Dye
 	 */
+	@Override
 	public Long getColorId(){
 		return color_id;
 	}
@@ -72,10 +75,12 @@ public class GW2Consumable extends GW2Item{
 	 * 
 	 * returns null unless the secondary type is CraftingRecipe
 	 */
+	@Override
 	public Long getRecipeId(){
 		return recipe_id;
 	}
 	
+	@Override
 	public Long getDuration(){
 		return duration;
 	}

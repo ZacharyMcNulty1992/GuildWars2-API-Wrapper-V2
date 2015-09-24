@@ -22,10 +22,15 @@ public class GW2SalvageKit extends GW2Item {
     
 	}
 
+	/***********
+	 * Getters *
+	 ***********/
+	@Override
 	public String getSecondaryType(){
 		return secondaryType;
 	}
 	
+	@Override
 	public Long getCharges(){
 		return charges;
 	}

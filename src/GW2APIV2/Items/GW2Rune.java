@@ -14,6 +14,7 @@ public class GW2Rune extends GW2UpgradeComponent{
 		bonuses = (List<String>) super.details.get("bonuses");
 	}
 	
+	@Override
 	public List<String> getBonuses(){
 		return bonuses;
 	}
