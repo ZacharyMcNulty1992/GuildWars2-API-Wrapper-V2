@@ -28,7 +28,12 @@ public class GW2Trinket extends GW2Item {
     	}
     	
     	JSONObject iu = (JSONObject) details.get("infix_upgrade");
-    	infix_upgrade = new GW2InfixUpgrade(iu);
+    	
+    	if(iu != null)
+    		infix_upgrade = new GW2InfixUpgrade(iu);
+    	else
+    		infix_upgrade = null;
+    	
     	suffix_item_id = (Long) details.get("suffix_item_id");
     	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
 	}

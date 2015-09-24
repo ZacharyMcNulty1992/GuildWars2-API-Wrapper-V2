@@ -32,8 +32,16 @@ public class GW2Armor extends GW2Item {
     	for(JSONObject a : is){
     		infusion_slots.add(new GW2InfusionSlot(a));
     	}
+    	
     	JSONObject iu = (JSONObject) details.get("infix_upgrade");
-    	infix_upgrade = new GW2InfixUpgrade(iu);
+    	
+    	//test for null here
+    	if(iu != null)
+    		infix_upgrade = new GW2InfixUpgrade(iu);
+    	else
+    		infix_upgrade = null;
+    	
+    	
     	suffix_item_id = (Long) details.get("suffix_item_id");
     	secondary_suffix_item_id = (String) details.get("secondary_suffix_item_id");
         

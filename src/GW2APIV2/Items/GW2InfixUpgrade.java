@@ -17,16 +17,18 @@ public class GW2InfixUpgrade {
 	//a list for getting the attribute and its modifier
 	private List<JSONObject> att;
 	
+	@SuppressWarnings("unchecked")
 	public GW2InfixUpgrade(JSONObject o){
-
-		att = (List) o.get("attributes");
 		
+		att = (List<JSONObject>) o.get("attributes");
 		attributes = new HashMap<String, Long>();
 		
-		//populate the attributes map
+		
+		//	populate the attributes map
 		for(JSONObject a : att){
 			attributes.put((String) a.get("attribute"), (Long) a.get("modifier"));
 		}
+
 		
 		JSONObject buff = (JSONObject) o.get("buff");
 		
@@ -39,7 +41,6 @@ public class GW2InfixUpgrade {
 		}
 			
 	}
-	
 	
 	/***********
 	 * Getters *
