@@ -13,7 +13,7 @@ public class GW2Parser extends Thread {
 	
 	private final Object GIM = new Object();
 	private List<String> LON;
-	private HashMap<Integer, String> MON;
+	private HashMap<String, Long> MON;
 	private List<JSONObject> o; //supplied by sending this class a new list
 	private int maxIndex;//the total number of pages that need to be parsed
 	private int currentIndex;//number of pages currently parsed
@@ -23,7 +23,7 @@ public class GW2Parser extends Thread {
 	
 	public GW2Parser(){
 		LON = new ArrayList<String>();
-		MON = new HashMap<Integer, String>();
+		MON = new HashMap<String, Long>();
 		o = new ArrayList<JSONObject>();
 		currentIndex = 0;
 		maxIndex = 0;
@@ -50,7 +50,7 @@ public class GW2Parser extends Thread {
 			while(wait){
 				try{
 					GIM.wait();
-					System.out.println("Parser is waiting");
+					//System.out.println("Parser is waiting");
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -73,7 +73,7 @@ public class GW2Parser extends Thread {
 				
 				id = (Long) (o.get(i)).get("id");
 				
-				MON.put((Integer) id.intValue(), (String) o.get(i).get("name"));
+				MON.put( (String) o.get(i).get("name") , id);
 				
 				if((i + 1) == o.size())
 					count = o.size();

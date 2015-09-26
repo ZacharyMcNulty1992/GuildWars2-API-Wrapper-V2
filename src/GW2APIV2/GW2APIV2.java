@@ -235,9 +235,9 @@ public class GW2APIV2 {
      * returns: a Map containing the names of items indexed by their id
      * throws: Malformed URL Exception and JSONException
      */
-    public HashMap getItems() throws IOException, ParseException, InterruptedException{
+    public HashMap<String, Long> getItems() throws IOException, ParseException, InterruptedException{
     	
-    	HashMap listOfNames = ic.getMapOfNames();
+    	HashMap<String, Long> listOfNames = ic.getMapOfNames();
 
     	return listOfNames;
     }

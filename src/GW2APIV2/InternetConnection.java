@@ -229,7 +229,7 @@ public class InternetConnection{
     ****************/
    
     @SuppressWarnings("unchecked")
-	public HashMap getMapOfNames() throws IOException, ParseException, InterruptedException{  
+	public HashMap<String, Long> getMapOfNames() throws IOException, ParseException, InterruptedException{  
 
     	try{
     		parser = new GW2Parser();
