@@ -219,7 +219,8 @@ public class GW2APIV2 {
             							  break;
             	case "weapon" : g = new GW2Weapon(o);
             					break;
-            	default : break;
+            	default : g = new GW2Item(o);
+            		break;
             }
             
             return g;
