@@ -346,6 +346,11 @@ public class GW2APIV2 {
 
     }
     
+    /*
+     * getTrait
+     * Params: a Trait id
+     * Returns: a trait object
+     */
     public GW2Trait getTrait(Long id){
     	return ic.getTrait(id);
     }
