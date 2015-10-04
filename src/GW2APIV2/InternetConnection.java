@@ -357,4 +357,21 @@ public class InternetConnection{
 		return null;
 	}
     
+    public HashMap<String, String> getMapOfCommonAssets(){
+    	try {
+			URL u = new URL("https://api.guildwars2.com/v2/files?ids=all");
+			List<JSONObject> a = (List) getJsonArray(u);
+			HashMap <String, String> c = new HashMap<String, String>();
+			
+			for(JSONObject b : a){
+				c.put((String) b.get("id"), (String) b.get("icon"));
+			}
+			
+			return c;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
 }

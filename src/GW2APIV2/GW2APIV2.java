@@ -355,6 +355,10 @@ public class GW2APIV2 {
     	return ic.getTrait(id);
     }
     
+    public HashMap<String, String> getCommonlyUsedAssets(){
+    	return ic.getMapOfCommonAssets();
+    }
+    
     
     /*************************
      *  Trading Post Methods *
