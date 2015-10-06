@@ -274,12 +274,11 @@ public class InternetConnection{
 		return parser.getMap();
     }
     
-    public List<JSONObject> get200Items(int index){
+    public List<JSONObject> getXItems(int index, int numOfObj){
     	
     	try{
 
-			System.out.println("getting 200 JSONObjects");
-    		URL x = new URL(itemURL + "?page=" + index + "&page_size=200");
+    		URL x = new URL(itemURL + "?page=" + index + "&page_size=" + numOfObj);
     		List<JSONObject> b = (List) getJsonArray(x);
     		
     		System.out.println("returning the list of JSONObjects");

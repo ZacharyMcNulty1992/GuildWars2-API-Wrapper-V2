@@ -251,10 +251,10 @@ public class GW2APIV2 {
      * NOTE: this number must be less than 228
      */
     
-    public List<GW2Item> get200Items(int val){
+    public List<GW2Item> getXItems(int pageNum, int numOfObj ){
     	
     	List<GW2Item> itemList = new ArrayList<GW2Item>();
-    	List<JSONObject> a = ic.get200Items(val);
+    	List<JSONObject> a = ic.getXItems(pageNum, numOfObj);
     	
     	int x = 1;
     	
