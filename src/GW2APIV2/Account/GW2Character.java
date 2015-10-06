@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import GW2APIV2.InternetConnection;
+import GW2APIV2.Account.Crafting.CraftingDiscipline;
 import GW2APIV2.Items.GW2Item;
 
 public class GW2Character {
@@ -23,6 +24,8 @@ public class GW2Character {
 	private Long deaths; //number of deaths on this character
 	private List<GW2Item> bags; //items in characters bags
 	private List<GW2Item> equips; //items currently equipped on character
+	private List<CraftingDiscipline> crafting; //all crafting disciplines on this character 
+	
 	
 	protected InternetConnection ic; //internet connection class for obtaining character information from character endpoints
 	protected String standardURL; //url for character endpoints
