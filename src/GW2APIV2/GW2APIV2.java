@@ -244,11 +244,11 @@ public class GW2APIV2 {
     }
     
     /*
-     * get200Items
-     * Params: the paging index of the set of 200 items
+     * getXItems
+     * Params: the paging index (a number between 0 and 228), the number of objects on each page (MAX: 200)
      * Returns: a list of 200 items
      * 
-     * NOTE: this number must be less than 228
+     * NOTE: the paging index must be less than 228 if retrieving 200 objects(the max amount per page)
      */
     
     public List<GW2Item> getXItems(int pageNum, int numOfObj ){
