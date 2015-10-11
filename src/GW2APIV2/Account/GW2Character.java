@@ -26,6 +26,9 @@ public class GW2Character {
 	private List<GW2Item> equips; //items currently equipped on character
 	private List<CraftingDiscipline> crafting; //all crafting disciplines on this character 
 	
+	private List<GW2Specialization> pvp_spec; //the characters pvp specialization
+	private List<GW2Specialization> pve_spec; //the characters pve specialization
+	private List<GW2Specialization> wvw_spec; //the characters wvw specialization
 	
 	protected InternetConnection ic; //internet connection class for obtaining character information from character endpoints
 	protected String standardURL; //url for character endpoints
@@ -88,6 +91,41 @@ public class GW2Character {
 			invInfo((JSONArray)a.get("equipment"), (JSONArray)a.get("bags"));
 		}	
 		if(buildPermission){
+			
+			//get the spec object
+			JSONObject spec = (JSONObject) a.get("specialization");
+			
+			//each spec object contains a wvw, pvp, and pve spec for the character
+			//now parse the pve sub object in the spec object
+			List<JSONObject> b = (List) spec.get("pve");
+			
+			//now populate a list of specialization objects from the data in the pve 
+			//sub object
+			for(JSONObject g: b){
+				pve_spec.add(new GW2Specialization(g));
+			}
+			
+			//now parse the pvp spec
+			//first get the pvp sub object from the spec object
+			//also repurpose the variable b 
+			b = (List) spec.get("pvp");
+			
+			//now populate a list of specialization objects from the data in the pvp
+			//sub object
+			
+			for(JSONObject g: b){
+				pvp_spec.add(new GW2Specialization(g));
+			}
+			
+			//now for the world vs. world spec for this character
+			//get the wvw sub object from the spec object
+			b = (List) spec.get("wvw");
+			
+			//now populate a list of specialization objects from the data in the wvw 
+			//sub object
+			for(JSONObject g: b){
+				wvw_spec.add(new GW2Specialization(g));
+			}
 			
 		}
 		
@@ -180,6 +218,13 @@ public class GW2Character {
 	
 	public List<GW2Item> getEquips(){
 		return equips;
+	}
+	
+	public List<GW2Specialization> getPVESpec(){
+		return pve_spec;
+	}
+	public List<GW2Specialization> getPVPSpec(){
+		return pvp_spec;
 	}
 }
 
