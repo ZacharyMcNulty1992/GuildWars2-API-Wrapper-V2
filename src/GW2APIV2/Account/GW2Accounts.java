@@ -7,9 +7,15 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import GW2APIV2.Items.GW2Dye;
 import GW2APIV2.TradingPost.GW2Currency;
 
 public class GW2Accounts {
+	
+	/*
+	 * see documentation for usage and more information
+	 */
+	
 	/*
 	 * API Key Variables
 	 */
@@ -55,6 +61,12 @@ public class GW2Accounts {
 	 * Wallet variables
 	 */
 	private List<GW2Currency> wallet;
+	
+	/*
+	 * List of Unlocked Dyes and skins
+	 */
+	private List<GW2Dye> dyeList;
+	private List<GW2Skin> skinList;
 	
 	/*
 	 * Constructor
@@ -117,6 +129,8 @@ public class GW2Accounts {
 	
 	/*
 	 * setters
+	 * 
+	 * supply information to this class for later ease of use
 	 */
 	
 	public void supplyAccountTokenInfo(JSONObject a){
@@ -171,6 +185,11 @@ public class GW2Accounts {
 	
 	public void supplyWallet(List<GW2Currency> a){
 		wallet = a;
+	}
+	
+	public void supplyUnlockInfo(List<GW2Dye> a, List<GW2Skin> b){
+		dyeList = a;
+		skinList = b;
 	}
 	
 	

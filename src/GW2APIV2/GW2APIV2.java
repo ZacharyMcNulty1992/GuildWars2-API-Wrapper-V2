@@ -122,6 +122,44 @@ public class GW2APIV2 {
 
     		}
     		if(a.unlocksPermission){
+    			URL skinURL = new URL(Standard_URL + "account/skins");
+    			URL dyeURL = new URL(Standard_URL + "account/dyes");
+    			
+    			List<Long> dyeIdObj = (List) ic.getJsonArray(dyeURL);
+    			
+    			List<Long> dyeIdList = new ArrayList<Long>(); 
+    			List<GW2Dye> dyeList = new ArrayList<GW2Dye>();
+    			
+    			//variables for getting the dyes from the color endpoint
+    			String colorString = Standard_URL + "color/";
+    			URL colorURL = new URL(colorString);
+    			
+    			
+    			for(Long id: dyeIdObj){
+    				//make a new url for the color endpoint using the dye id
+    				colorURL = new URL(colorString + id);
+    				
+    				//get the JSONObject
+    				JSONObject v = ic.getJsonObj(colorURL);
+    				
+    				dyeList.add(new GW2Dye(v));
+    				
+    			}
+    			
+    			List<Long> skinIdObject = (List) ic.getJsonObj(skinURL);
+    			List<GW2Skin> skinsList = new ArrayList();
+    			URL skinsURL = new URL(Standard_URL + "skins/");
+    			
+    			for(Long id: skinIdObject){
+    				skinsURL = new URL(Standard_URL + "skins/" + id);
+    				
+    				JSONObject skin = ic.getJsonObj(skinsURL);
+    				
+    				skinsList.add(new GW2Skin(skin));
+    			}
+    			
+    			//now give the lists to the account class
+    			a.supplyUnlockInfo(dyeList, skinsList);
     			
     		}
     		if(a.pvpPermission){
