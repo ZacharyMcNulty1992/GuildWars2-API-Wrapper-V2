@@ -213,6 +213,14 @@ public class GW2Accounts {
 		return wallet;
 	}
 	
+	public List<GW2Dye> getUnlockedDyes(){
+		return dyeList;
+	}
+	
+	public List<GW2Skin> getUnlockedSkins(){
+		return skinList;
+	}
+	
 	public HashMap getCharacters(){
 		return characterMap;
 	}
