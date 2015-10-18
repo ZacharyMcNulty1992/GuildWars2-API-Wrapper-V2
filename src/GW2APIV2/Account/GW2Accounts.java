@@ -202,6 +202,10 @@ public class GW2Accounts {
 		skinList = b;
 	}
 	
+	public void supplyPvpInformation(List<JSONObject> pvpGame, JSONObject pvpStats) {
+		//stub
+	}
+	
 	
 	/*
 	 * getters
@@ -238,5 +242,4 @@ public class GW2Accounts {
 	public Long getWorld(){
 		return world;
 	}
-	
 }
