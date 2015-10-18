@@ -42,28 +42,38 @@ public class GW2Accounts {
 	
 	/*
 	 * Character Variables
+	 * 
+	 * Key: name of character
+	 * Value: character object
 	 */
 	private HashMap<String, GW2Character> characterMap;
 	
 	/*
 	 * Bank variables
 	 * 
-	 * the bank map's key is the id of the item and the value is the quantity of that item
+	 * List of BankItems
 	 */
 	private List<GW2BankItem> bank;
 	
 	/*
 	 * Materials Variables
+	 * 
+	 * List of banked materials
 	 */
 	private List<GW2BankedMaterial> materials;
 	
 	/*
 	 * Wallet variables
+	 * 
+	 * List of currency objects
 	 */
 	private List<GW2Currency> wallet;
 	
 	/*
 	 * List of Unlocked Dyes and skins
+	 * 
+	 * List of Dye objects
+	 * List of Skins objects
 	 */
 	private List<GW2Dye> dyeList;
 	private List<GW2Skin> skinList;
