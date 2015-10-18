@@ -94,39 +94,41 @@ public class GW2Character {
 			
 			//get the spec object
 			JSONObject spec = (JSONObject) a.get("specialization");
+			if(spec != null){
+				
+				//each spec object contains a wvw, pvp, and pve spec for the character
+				//now parse the pve sub object in the spec object
 			
-			//each spec object contains a wvw, pvp, and pve spec for the character
-			//now parse the pve sub object in the spec object
-			List<JSONObject> b = (List) spec.get("pve");
+				List<JSONObject> b = (List) spec.get("pve");
 			
-			//now populate a list of specialization objects from the data in the pve 
-			//sub object
-			for(JSONObject g: b){
-				pve_spec.add(new GW2Specialization(g));
+				//now populate a list of specialization objects from the data in the pve 
+				//sub object
+				for(JSONObject g: b){
+					pve_spec.add(new GW2Specialization(g));
+				}
+			
+				//now parse the pvp spec
+				//first get the pvp sub object from the spec object
+				//also repurpose the variable b 
+				b = (List) spec.get("pvp");
+			
+				//now populate a list of specialization objects from the data in the pvp
+				//sub object
+			
+				for(JSONObject g: b){
+					pvp_spec.add(new GW2Specialization(g));
+				}
+			
+				//now for the world vs. world spec for this character
+				//get the wvw sub object from the spec object
+				b = (List) spec.get("wvw");
+			
+				//now populate a list of specialization objects from the data in the wvw 
+				//sub object
+				for(JSONObject g: b){
+					wvw_spec.add(new GW2Specialization(g));
+				}
 			}
-			
-			//now parse the pvp spec
-			//first get the pvp sub object from the spec object
-			//also repurpose the variable b 
-			b = (List) spec.get("pvp");
-			
-			//now populate a list of specialization objects from the data in the pvp
-			//sub object
-			
-			for(JSONObject g: b){
-				pvp_spec.add(new GW2Specialization(g));
-			}
-			
-			//now for the world vs. world spec for this character
-			//get the wvw sub object from the spec object
-			b = (List) spec.get("wvw");
-			
-			//now populate a list of specialization objects from the data in the wvw 
-			//sub object
-			for(JSONObject g: b){
-				wvw_spec.add(new GW2Specialization(g));
-			}
-			
 		}
 		
 	}

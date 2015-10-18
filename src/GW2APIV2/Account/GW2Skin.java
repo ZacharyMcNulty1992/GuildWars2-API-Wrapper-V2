@@ -35,7 +35,6 @@ public class GW2Skin {
 		description = (String) o.get("description");
 		details = (JSONObject) o.get("details");
 		
-		
 		//now fill secondary variables based on the type of skin 
 		if(type == "Armor"){
 			secondaryType = (String) details.get("type");
