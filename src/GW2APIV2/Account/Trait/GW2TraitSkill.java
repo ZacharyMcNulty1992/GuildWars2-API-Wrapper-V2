@@ -99,7 +99,7 @@ public class GW2TraitSkill {
 							    break;
 				case "Distance" : facts.add(new GW2Distance(a));
 							      break;
-				case "noData" : facts.add(new GW2TraitedFacts(a));
+				case "NoData" : facts.add(new GW2TraitedFacts(a));
 							    break;
 				case "Number" : facts.add(new GW2Number(a));
 							    break;

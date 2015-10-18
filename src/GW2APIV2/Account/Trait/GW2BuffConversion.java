@@ -5,14 +5,14 @@ import org.json.simple.JSONObject;
 public class GW2BuffConversion extends GW2TraitedFacts {
 	
 	private String source; //attribute used to calculate the gain
-	private String percent; //amount of the source attribute is added to the target
+	private Long percent; //amount of the source attribute is added to the target
 	private String target; //the attribute that is added to
 	
 	public GW2BuffConversion(JSONObject o){
 		super(o);
 		
 		source = (String) o.get("source");
-		percent = (String) o.get("percent");
+		percent = (Long) o.get("percent");
 		target = (String) o.get("target");
 		
 	}
@@ -26,7 +26,7 @@ public class GW2BuffConversion extends GW2TraitedFacts {
 		return source;
 	}
 	
-	public String getPercent(){
+	public Long getPercent(){
 		return percent;
 	}
 	
