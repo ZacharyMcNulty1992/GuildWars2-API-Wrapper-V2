@@ -89,12 +89,12 @@ public class GW2Character {
 		age = (Long) a.get("age");
 		creation_time = (String) a.get("created");
 		deaths = (Long) a.get("deaths");
-		
-		//initialize the specialization lists
+
+		// initialize the specialization lists
 		pve_spec = new ArrayList();
 		pvp_spec = new ArrayList();
 		wvw_spec = new ArrayList();
-		
+
 		// check to see what permissions are available
 		if (bp) {
 			invInfo((JSONArray) a.get("equipment"), (JSONArray) a.get("bags"));
@@ -106,7 +106,7 @@ public class GW2Character {
 				if (spec != null) {
 
 					URL specPoint = new URL("https://api.guildwars2.com/v2");
-					
+
 					// each spec object contains a wvw, pvp, and pve spec for
 					// the character
 					// now parse the pve sub object in the spec object
@@ -118,11 +118,11 @@ public class GW2Character {
 						// the data in the pve
 						// sub object
 						for (JSONObject g : b) {
-							if(g != null){
-							specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
-							JSONObject blah =  ic.getJsonObj(specPoint);
-							pve_spec.add(new GW2Specialization(blah));
-							}else
+							if (g != null) {
+								specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
+								JSONObject blah = ic.getJsonObj(specPoint);
+								pve_spec.add(new GW2Specialization(blah));
+							} else
 								pve_spec.add(null);
 						}
 					} else {
@@ -139,12 +139,11 @@ public class GW2Character {
 					// sub object
 					if (b != null) {
 						for (JSONObject g : b) {
-							if(g != null){
-							specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
-							JSONObject blah =  ic.getJsonObj(specPoint);
-							pvp_spec.add(new GW2Specialization(blah));
-							}
-							else
+							if (g != null) {
+								specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
+								JSONObject blah = ic.getJsonObj(specPoint);
+								pvp_spec.add(new GW2Specialization(blah));
+							} else
 								pvp_spec.add(null);
 						}
 					} else {
@@ -159,11 +158,11 @@ public class GW2Character {
 					// sub object
 					if (b != null) {
 						for (JSONObject g : b) {
-							if(g != null){
-							specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
-							JSONObject blah =  ic.getJsonObj(specPoint);
-							wvw_spec.add(new GW2Specialization(blah));
-							}else
+							if (g != null) {
+								specPoint = new URL("https://api.guildwars2.com/v2/specializations/" + g.get("id"));
+								JSONObject blah = ic.getJsonObj(specPoint);
+								wvw_spec.add(new GW2Specialization(blah));
+							} else
 								wvw_spec.add(null);
 						}
 					} else {
