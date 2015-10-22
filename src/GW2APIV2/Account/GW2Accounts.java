@@ -79,6 +79,14 @@ public class GW2Accounts {
 	private List<GW2Skin> skinList;
 	
 	/*
+	 * pvp variables
+	 * 
+	 * List of pvp matches and the information
+	 */
+	private List<GW2PvpGame> pvpGameList;
+	private GW2PvpStats pvpStats;
+	
+	/*
 	 * Constructor
 	 * Params: a String representation of an api key, and an instance of the internet connection class
 	 */
@@ -203,7 +211,17 @@ public class GW2Accounts {
 	}
 	
 	public void supplyPvpInformation(List<JSONObject> pvpGame, JSONObject pvpStats) {
-		//stub
+		
+		pvpGameList = new ArrayList();
+		
+		//parse the list of pvpGames
+		for(JSONObject a : pvpGame){
+			pvpGameList.add(new GW2PvpGame(a));
+		}
+		
+		//init the pvpStats object
+		this.pvpStats = new GW2PvpStats(pvpStats);
+		
 	}
 	
 	
