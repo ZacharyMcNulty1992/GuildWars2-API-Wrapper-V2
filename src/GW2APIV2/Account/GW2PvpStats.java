@@ -88,4 +88,39 @@ public class GW2PvpStats {
 			}
 		}
 		
+		/*
+		 * getters
+		 */
+		
+		public Long getPvpRank(){
+			return pvp_rank;
+		}
+		
+		public List<GW2PvpCharacterStats> getProfessionList(){
+			return professionList;
+		}
+		
+		public List<GW2PvpLadder> getLadderList(){
+			return ladderList;
+		}
+		
+		public Long getNumOfWins(){
+			return wins;
+		}
+		
+		public Long getNumOfLosses(){
+			return losses;
+		}
+		
+		public Long getNumOfDesertions(){
+			return desertions;
+		}
+		
+		public Long getNumOfByes(){
+			return byes;
+		}
+		
+		public Long getNumOfForfiets(){
+			return forfiets;
+		}
 }
