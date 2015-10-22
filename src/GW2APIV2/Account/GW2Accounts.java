@@ -221,9 +221,7 @@ public class GW2Accounts {
 		
 		//init the pvpStats object
 		this.pvpStats = new GW2PvpStats(pvpStats);
-		
 	}
-	
 	
 	/*
 	 * getters
@@ -259,5 +257,9 @@ public class GW2Accounts {
 	
 	public Long getWorld(){
 		return world;
+	}
+	
+	public String getNameOfAPIKey(){
+		return nameOfKey;
 	}
 }
