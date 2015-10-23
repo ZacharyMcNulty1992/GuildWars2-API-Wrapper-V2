@@ -66,26 +66,6 @@ public class GW2Dye {
 		metalRGB = (List) obj.get("rgb");
 	}
 	
-	private Long turnThisDamnObjIntoLong(JSONObject o, String key){
-		
-		Number x = 0;
-		Long v = null;
-		
-		try{
-			x = (Number) o.get(key);
-			v = new Long(x.intValue());
-		}
-		catch(ClassCastException f){
-			
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	
 	/***********
 	 * Getters *
 	 ***********/
