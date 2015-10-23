@@ -73,7 +73,7 @@ public class GW2Dye {
 		
 		try{
 			x = (Number) o.get(key);
-			v = new Long((int)x);
+			v = new Long(x.intValue());
 		}
 		catch(ClassCastException f){
 			
