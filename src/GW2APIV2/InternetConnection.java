@@ -34,7 +34,7 @@ import javax.net.ssl.SSLContext;
 public class InternetConnection{
 
 
-    private GW2Parser parser;
+    private GW2Parser parser [];
     private JSONParser JsonParser;
     private JSONObject obj;
     private JSONArray jArray;
@@ -47,7 +47,7 @@ public class InternetConnection{
     private String baseURL;
     private String itemURL;
     private String TokenInfoURL;
-    private Thread p;
+    private Thread p[];
     
     public boolean apiKeySupplied;
     
@@ -232,46 +232,82 @@ public class InternetConnection{
 	public HashMap<String, Long> getMapOfNames() throws IOException, ParseException, InterruptedException{  
 
     	try{
-    		parser = new GW2Parser();
-            parser.start();
+    		int threadCount = 9;
     		
-    		JSONArray ja = null;
-        	List<JSONObject> g = null;
-        	URL newItemURL = null;
-        	
-    		//build url to return multiple JSONObjects in an array
-    		System.out.println("Loop Start");
-    		
-    		//this loops 206 times which is incredibly slow
-    		//multi thread this have one get the request and have the other parse the object
-    		for(int x = 0; x < 207; x++){
-    			itemURL = itemURL + "?page=" + x + "&page_size=200";
-    			newItemURL = new URL(itemURL);
-    			
-    			ja = getJsonArray(newItemURL);
 
-    			g = (List<JSONObject>) ja;
+    		Thread thread[] = new Thread[threadCount];
+    		
+    		//207 is the number of pages in the pagnation system
+    		// 4 is the number of threads
+    		int index = 208/threadCount;
+    		int min; //the lowest page number to parse at that thread
+    		int max; //the highest page number to parse at that thread
+    		int s = 0;
+    		GW2ItemCollector collect[] = new GW2ItemCollector[threadCount];
+    		
+    		//init the collector objects and give their ranges to
+    		for(int y = 0; y < threadCount; y++){
+    			//these next few lines get the page for the thread to start at (min)
+    			//and the page for the thread to stop at (max)
+    			min = index * y;
+    			max = s + index;
+    			max++;
+    			s = max + (index - 1);
+    			collect[y] = new GW2ItemCollector(min,max);
+    		}
+    		
+    		//starts all the threads
+    		for(int x = 0; x < threadCount; x++){
+    			thread[x] = new Thread(collect[x]);
+    			thread[x].start();	
+    		}
+    	
+    		//array of booleans
+    		boolean bool[] = new boolean[threadCount];
+    		boolean julean = false; //test bool for seeing if all threads have terminated
+    		
+    		//initial population of threads
+    		for(int f = 0; f < threadCount; f++){
+    			bool[f] = collect[f].getFinished();
+    		}
+    		
+    		
+    		//wait till the parser is finished
+        	while(true){
+    			Thread.sleep(2000);
+    			for(int x = 0; x < threadCount; x++){
+    				//see if 
+    				if(bool[x] == false){
+    					julean = false;
+    					break;
+    				}
+    				julean = true;		
+    			}
     			
-    			//give the new list to the parser
-    			parser.supplyNewList(g);
+    			//repopulate the list of bools to update for finished threads
+    			for(int f = 0; f < threadCount; f++){
+	    			bool[f] = collect[f].getFinished();
+	    		}
     			
-    			//reset the url
-    			itemURL = "https://api.guildwars2.com/v2/items";
-    			
-    		}//end of loop
+    			//if all booleans are true (all threads are terminated) we break the while loop
+    			if(julean == true)
+    				break;
+        	}
     		
     	}catch(Exception e){
     		e.printStackTrace();
     	}
     	
-    	//wait till the parser is finished
-    	while(true){
-			Thread.sleep(2000);
-			if(parser.finishedProcessing())
-				break;
-    	}
+    	int val = 0;
+    	
+    	
 		//return the list of names
-		return parser.getMap();
+    	HashMap map  = new HashMap();
+    	
+    	for(int x = 0; x < 4; x++){
+    		map.putAll(parser[x].getMap());
+    	}
+		return map;
     }
     
     public List<JSONObject> getXItems(int index, int numOfObj){

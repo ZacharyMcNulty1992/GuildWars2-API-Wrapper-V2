@@ -79,11 +79,10 @@ public class GW2Parser extends Thread {
 					count = o.size();
 				
 			}
-			System.out.println("Names added from page " + currentIndex);
 			//current index has been parsed now moving to the next one
 			currentIndex++;
 		}
-		
+		System.out.println("finished Parsing");
 		System.out.println("Pausing Parser");
 		pauseThread();
 	}
@@ -133,7 +132,7 @@ public class GW2Parser extends Thread {
 		return LON;
 	}
 	
-	public HashMap getMap(){
+	public HashMap<String, Long> getMap(){
 		return MON;
 	}
 }
