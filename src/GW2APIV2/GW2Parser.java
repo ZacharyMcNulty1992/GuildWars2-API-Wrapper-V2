@@ -18,6 +18,7 @@ public class GW2Parser extends Thread {
 	private int maxIndex;//the total number of pages that need to be parsed
 	private int currentIndex;//number of pages currently parsed
 	private int count; //where to look for new items in the updated list
+	private int maxNum; //the max index that can be parsed
 	private boolean finished;
 	private boolean wait;
 	
@@ -50,7 +51,6 @@ public class GW2Parser extends Thread {
 			while(wait){
 				try{
 					GIM.wait();
-					//System.out.println("Parser is waiting");
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -67,23 +67,23 @@ public class GW2Parser extends Thread {
 		if(currentIndex <= maxIndex && o != null){
 			
 			Long id;
+			int size = o.size();
 			
 			//System.out.println("adding names of page " + currentIndex);
-			for(int i = count; i < o.size(); i++){
+			for(int i = count; i < size; i++){
 				
 				id = (Long) (o.get(i)).get("id");
 				
 				MON.put( (String) o.get(i).get("name") , id);
 				
-				if((i + 1) == o.size())
+				if((i + 1) == size)
 					count = o.size();
 				
 			}
 			//current index has been parsed now moving to the next one
 			currentIndex++;
 		}
-		System.out.println("finished Parsing");
-		System.out.println("Pausing Parser");
+		
 		pauseThread();
 	}
 	
@@ -94,14 +94,14 @@ public class GW2Parser extends Thread {
 	public void pauseThread() throws InterruptedException{
 		wait = true;
 		
-		if(currentIndex == 207){
-			System.out.println("finished parsing");
+		if(currentIndex >= maxNum){
 			finished = true;
 		}
 	}
 	
 	public void resumeThread(){
 		synchronized(GIM){
+			finished = false;
 			wait = false;
 			GIM.notify();
 		}
@@ -115,7 +115,6 @@ public class GW2Parser extends Thread {
 	public void supplyNewList(List<JSONObject> i){
 		o.addAll(i);
 		maxIndex++;
-		System.out.println("Resuming Parser");
 		resumeThread();
 	}
 	

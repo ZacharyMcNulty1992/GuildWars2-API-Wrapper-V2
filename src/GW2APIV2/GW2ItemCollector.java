@@ -29,6 +29,7 @@ public class GW2ItemCollector implements Runnable {
 		finished = false;
 		Parser = new GW2Parser();
 		p = new Thread(Parser);
+		p.start();
 	}
 
 	public void run() {
@@ -40,6 +41,9 @@ public class GW2ItemCollector implements Runnable {
 		JSONArray a;
 		try {
 			for (int x = minNum; x <= maxNum; x++) {
+				//used for debugging
+				//System.out.println("getting item list at page : " + x + "      on thread : " + Thread.currentThread());
+				
 				// create the new url
 				itemURL = itemURL + "?page=" + x + "&page_size=200";
 				newItemURL = new URL(itemURL);
@@ -68,6 +72,7 @@ public class GW2ItemCollector implements Runnable {
 				}
 			}
 			
+			concatMap();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
