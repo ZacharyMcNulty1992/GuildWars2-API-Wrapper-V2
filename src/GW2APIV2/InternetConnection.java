@@ -23,6 +23,7 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
@@ -233,9 +234,8 @@ public class InternetConnection{
 
     	try{
     		//22 is the highest number of threads that will work
-    		int threadCount = 22; // number of threads (the number of pages must be divisable by this number)
+    		int threadCount = 22; //number of threads (the number of pages must be divisable by this number)
     		
-
     		Thread thread[] = new Thread[threadCount];
     		
     		//207 is the number of pages in the pagnation system
@@ -248,6 +248,7 @@ public class InternetConnection{
     		
     		//init the collector objects and give their ranges to
     		for(int y = 0; y < threadCount - 1; y++){
+    			//System.out.println("creating thread number : " + y);
     			//these next few lines get the page for the thread to start at (min)
     			//and the page for the thread to stop at (max)
     			min = base;
@@ -309,7 +310,13 @@ public class InternetConnection{
 	    	HashMap<String, Long> map  = new HashMap<String, Long>();
 	    	
 	    	for(int x = 0; x < threadCount - 1; x++){
-	    		map.putAll(collect[x].getMap());
+	    		HashMap<String, Long> mappy = collect[x].getMap();
+	    		Set<String> strings = mappy.keySet();
+	    		System.out.println("adding values at map number " + x);
+	    		for(String a : strings){
+	    			map.put(a, mappy.get(a));
+	    		}
+	    		
 	    	}
 			
 			return map;
@@ -321,6 +328,32 @@ public class InternetConnection{
     	
     	//if we get here there's a problem
 		return null;
+    }
+    
+    //get a map of items with their names and id but single hreaded
+    public HashMap<String, Long> getItemsST(){
+    	
+    	try{
+    		
+    		GW2ItemCollector a = new GW2ItemCollector(0, 231);
+    		Thread p = new Thread(a);
+    		
+    		p.start();
+    		
+    		while(true){
+    			Thread.sleep(2000);
+    			if(a.getFinished())
+    				break;
+    		}
+    		
+    		return a.getMap();
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	
+    	
+    	return null;
     }
     
     public List<JSONObject> getXItems(int index, int numOfObj){

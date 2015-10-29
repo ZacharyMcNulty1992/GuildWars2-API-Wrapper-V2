@@ -3,6 +3,7 @@ package GW2APIV2;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -89,8 +90,14 @@ public class GW2ItemCollector implements Runnable {
 	}
 	
 	public void concatMap(){
-		HashMap <String, Long> tmp = Parser.getMap();
-		map.putAll(tmp);
+		
+  		HashMap<String, Long> mappy = Parser.getMap();
+   		Set<String> strings = mappy.keySet();
+  
+   		for(String a : strings){
+    			map.put(a, mappy.get(a));
+    		}
+		
 	}
 	
 	public HashMap<String, Long> getMap(){

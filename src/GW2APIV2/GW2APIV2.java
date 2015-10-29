@@ -319,7 +319,21 @@ public class GW2APIV2 {
 
 		return listOfNames;
 	}
-
+	
+	public HashMap<String, Long> getItemsST(){
+		try{
+			HashMap<String, Long> a = ic.getItemsST();
+			
+			return a;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
 	/*
 	 * getXItems Params: the paging index (a number between 0 and 228), the
 	 * number of objects on each page (MAX: 200) Returns: a list of 200 items
