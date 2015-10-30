@@ -89,8 +89,6 @@ public class InternetConnection{
         baseURL = "https://api.guildwars2.com/v2/";
         itemURL = baseURL + "items";
 		TokenInfoURL = baseURL + "tokeninfo";
-        
-        JsonParser = new JSONParser();
     }
 
     /*
@@ -131,8 +129,6 @@ public class InternetConnection{
             
             if(apiKey != null)
             	urlConnection.setRequestProperty("Authorization: ", "Bearer " + apiKey);
-            else
-            	urlConnection.addRequestProperty("Authorization: ", "Bearer " + AuthToken);
             
             urlConnection.setSSLSocketFactory(SocketFactory.getSocketFactory());
             
