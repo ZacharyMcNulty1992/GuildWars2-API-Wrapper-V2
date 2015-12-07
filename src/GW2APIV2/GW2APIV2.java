@@ -423,11 +423,21 @@ public class GW2APIV2 {
 	 * getIcon Params: a valid icon Url in a string format Returns: an image in
 	 * png format
 	 */
-	public Image getIcon(String iconURL) {
+	public Image getIconPNG(String iconURL) {
 
-		return ic.getIcon(iconURL);
+		return ic.getIconPNG(iconURL);
+	}
+	
+	/*
+	 * getIcon Params: a valid icon Url in a string format Returns: an image in
+	 * jpg format
+	 */
+	public Object getIconJPG(String iconURL) {
+
+		return ic.getIconJPG(iconURL);
 	}
 
+	
 	/********************
 	 * Account Methods * API KEY NEEDED * FOR MOST METHODS*
 	 ********************/

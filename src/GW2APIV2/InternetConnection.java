@@ -243,7 +243,7 @@ public class InternetConnection{
     		GW2ItemCollector collect[] = new GW2ItemCollector[threadCount];
     		
     		//init the collector objects and give their ranges to
-    		for(int y = 0; y < threadCount - 1; y++){
+    		for(int y = 0; y < threadCount; y++){
     			//System.out.println("creating thread number : " + y);
     			//these next few lines get the page for the thread to start at (min)
     			//and the page for the thread to stop at (max)
@@ -266,7 +266,7 @@ public class InternetConnection{
     		boolean julean = false; //test bool for seeing if all threads have terminated
     		
     		//initial population of threads
-    		for(int f = 0; f < threadCount - 1; f++){
+    		for(int f = 0; f < threadCount; f++){
     			bool[f] = collect[f].getFinished();
     		}
     		
@@ -274,7 +274,7 @@ public class InternetConnection{
     		//wait till the parser is finished
         	while(true){
     			Thread.sleep(2000);
-    			for(int x = 0; x < threadCount - 1; x++){
+    			for(int x = 0; x < threadCount; x++){
     				//see if all threads are finished
     				if(bool[x] == false){
     					//System.out.println("not done yet, because of thread : " + x);
@@ -286,7 +286,7 @@ public class InternetConnection{
     			
     			//repopulate the list of bools to update for finished threads
     			if(julean != true)
-    				for(int f = 0; f < threadCount - 1; f++){
+    				for(int f = 0; f < threadCount; f++){
     					bool[f] = collect[f].getFinished();
     					//System.out.println("thread at : " + f + " : " + bool[f]);
     				}
@@ -305,10 +305,10 @@ public class InternetConnection{
 			//return the list of names
 	    	HashMap<String, Long> map  = new HashMap<String, Long>();
 	    	
-	    	for(int x = 0; x < threadCount - 1; x++){
+	    	for(int x = 0; x < threadCount; x++){
 	    		HashMap<String, Long> mappy = collect[x].getMap();
 	    		Set<String> strings = mappy.keySet();
-	    		System.out.println("adding values at map number " + x);
+	    		//System.out.println("adding values at map number " + x);
 	    		for(String a : strings){
 	    			map.put(a, mappy.get(a));
 	    		}
@@ -375,7 +375,7 @@ public class InternetConnection{
      * Returns: a rendered image
      */
     
-    public Image getIcon(String iconUrl){
+    public Image getIconPNG(String iconUrl){
     	
     	try{
     		URL IU = new URL(iconUrl + ".png");
@@ -390,6 +390,21 @@ public class InternetConnection{
     	
     	return null;
     }
+    
+    public Object getIconJPG(String iconUrl){
+    	
+    	try{
+    		URL IU = new URL(iconUrl + ".jpg");
+    		
+    		return getRenderedContent(IU);
+    		
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	
+    	return null;
+    }
+    
     
     /*******************
      * API Key Methods *
