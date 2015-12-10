@@ -89,6 +89,8 @@ public class InternetConnection{
         baseURL = "https://api.guildwars2.com/v2/";
         itemURL = baseURL + "items";
 		TokenInfoURL = baseURL + "tokeninfo";
+		
+		JsonParser = new JSONParser();
     }
 
     /*
