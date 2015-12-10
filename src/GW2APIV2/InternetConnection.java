@@ -5,10 +5,7 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import GW2APIV2.Account.GW2Trait;
-import GW2APIV2.Items.GW2Item;
-
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,11 +17,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.security.SecureRandom;
 import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -232,13 +227,13 @@ public class InternetConnection{
 
     	try{
     		//22 is the highest number of threads that will work
-    		int threadCount = 22; //number of threads (the number of pages must be divisable by this number)
+    		int threadCount = 64; //number of threads (the number of pages must be divisable by this number)
     		
     		Thread thread[] = new Thread[threadCount];
     		
     		//207 is the number of pages in the pagnation system
     		// 4 is the number of threads
-    		int range = 231/threadCount;
+    		int range = 256/threadCount;
     		int min; //the lowest page number to parse at that thread
     		int max; //the highest page number to parse at that thread
     		int base = 0;
@@ -249,12 +244,18 @@ public class InternetConnection{
     			//System.out.println("creating thread number : " + y);
     			//these next few lines get the page for the thread to start at (min)
     			//and the page for the thread to stop at (max)
-    			min = base;
-    			max = base + range;
-    			base += range + 1;
-    			if (max > 231)
-    				max = 231;
-    			collect[y] = new GW2ItemCollector(min,max);
+    			
+    			if(y == 0)
+    				min = base;
+    			else
+    				min = base + 1;
+    			max = (base + range);
+    			
+    			base += range;
+    			if (max > 256)
+    				max = 256;
+
+    			collect[y] = new GW2ItemCollector(min, max);
     		}
     		
     		//starts all the threads
@@ -267,19 +268,20 @@ public class InternetConnection{
     		boolean bool[] = new boolean[threadCount];
     		boolean julean = false; //test bool for seeing if all threads have terminated
     		
-    		//initial population of threads
+    		//initial population of threads that are finished array
     		for(int f = 0; f < threadCount; f++){
     			bool[f] = collect[f].getFinished();
     		}
     		
     		
-    		//wait till the parser is finished
-        	while(true){
+    		//wait till the parsers is finished
+        	while(!julean){
+        		//make the main thread wait
     			Thread.sleep(2000);
     			for(int x = 0; x < threadCount; x++){
     				//see if all threads are finished
     				if(bool[x] == false){
-    					//System.out.println("not done yet, because of thread : " + x);
+    					System.out.println("not done yet, because of thread : " + x);
     					julean = false;
     					break;
     				}
@@ -293,17 +295,10 @@ public class InternetConnection{
     					//System.out.println("thread at : " + f + " : " + bool[f]);
     				}
     			
-    			//if all booleans are true (all threads are terminated) we break the while loop
-    			if(julean == true)
-    				break;
-    			
         	}
-        	
-        	//System.out.println("out of the loop in the internetConnection class");
-        	
-        	int val = 0;
+
+	    	System.out.println("concating all the maps");
 	    	
-	    	//System.out.println("concating all the maps");
 			//return the list of names
 	    	HashMap<String, Long> map  = new HashMap<String, Long>();
 	    	

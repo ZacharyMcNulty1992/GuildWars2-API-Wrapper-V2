@@ -333,6 +333,23 @@ public class GW2APIV2 {
 		return null;
 	}
 	
+	public List<Long> getListOfItemIDs(){
+		
+		try{
+			
+			JSONArray array = ic.getJsonArray(new URL(Standard_URL + "items/"));
+			
+			List<Long> a = (List) array;
+			
+			return a;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	
 	/*
 	 * getXItems Params: the paging index (a number between 0 and 228), the

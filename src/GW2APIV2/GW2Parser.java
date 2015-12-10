@@ -2,10 +2,8 @@ package GW2APIV2;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+
 
 import org.json.simple.JSONObject;
 
@@ -22,7 +20,7 @@ public class GW2Parser extends Thread {
 	private boolean finished;
 	private boolean wait;
 	
-	public GW2Parser(){
+	public GW2Parser(int maximum){
 		LON = new ArrayList<String>();
 		MON = new HashMap<String, Long>();
 		o = new ArrayList<JSONObject>();
@@ -31,19 +29,22 @@ public class GW2Parser extends Thread {
 		count = 0;
 		finished = false;
 		wait = true;
+		maxNum = maximum;
 	}
 	
 	public void run(){
 		
 		//each iteration will look for if it should wait
 		try{
-			while (true){
+			while (!finished){
 				checkForWait();
 				parseMap();
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		System.out.println("Thread has finished");
 	}
 	
 	protected void checkForWait(){
@@ -101,7 +102,6 @@ public class GW2Parser extends Thread {
 	
 	public void resumeThread(){
 		synchronized(GIM){
-			finished = false;
 			wait = false;
 			GIM.notify();
 		}

@@ -28,7 +28,7 @@ public class GW2ItemCollector implements Runnable {
 		ic = new InternetConnection();
 		itemURL = "https://api.guildwars2.com/v2/items";
 		finished = false;
-		Parser = new GW2Parser();
+		Parser = new GW2Parser(max);
 		p = new Thread(Parser);
 		p.start();
 	}
@@ -42,8 +42,6 @@ public class GW2ItemCollector implements Runnable {
 		JSONArray a;
 		try {
 			for (int x = minNum; x <= maxNum; x++) {
-				//used for debugging
-				//System.out.println("getting item list at page : " + x + "      on thread : " + Thread.currentThread());
 				
 				// create the new url
 				itemURL = itemURL + "?page=" + x + "&page_size=200";
@@ -73,6 +71,7 @@ public class GW2ItemCollector implements Runnable {
 				}
 			}
 			
+			System.out.println("concating map");
 			concatMap();
 			
 		} catch (Exception e) {
