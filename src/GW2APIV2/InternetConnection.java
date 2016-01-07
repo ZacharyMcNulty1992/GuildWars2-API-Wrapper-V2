@@ -226,14 +226,17 @@ public class InternetConnection{
 	public HashMap<String, Long> getMapOfNames() throws IOException, ParseException, InterruptedException{  
 
     	try{
-    		//22 is the highest number of threads that will work
-    		int threadCount = 64; //number of threads (the number of pages must be divisable by this number)
+    		//the number of threads used to collect item data
+    		//sine our max number of pages is 259 then we can have 
+    		//either 7 threads or 37 threads
+    		//since we dont care about overhead right now we will use 37
+    		int threadCount = 37; //thus our range will be 7 pages per thread
     		
     		Thread thread[] = new Thread[threadCount];
     		
     		//207 is the number of pages in the pagnation system
     		// 4 is the number of threads
-    		int range = 256/threadCount;
+    		int range = 259/threadCount;
     		int min; //the lowest page number to parse at that thread
     		int max; //the highest page number to parse at that thread
     		int base = 0;
@@ -252,10 +255,11 @@ public class InternetConnection{
     			max = (base + range);
     			
     			base += range;
-    			if (max > 256)
-    				max = 256;
+    			if (max > 259)
+    				max = 259;
 
     			collect[y] = new GW2ItemCollector(min, max);
+    			System.out.println("Thread: " + y + "\tMin: " + min + "\tMax: " + max);
     		}
     		
     		//starts all the threads
@@ -264,6 +268,8 @@ public class InternetConnection{
     			thread[x].start();	
     		}
     	
+    		System.out.println("threads started");
+    		
     		//array of booleans
     		boolean bool[] = new boolean[threadCount];
     		boolean julean = false; //test bool for seeing if all threads have terminated
@@ -281,7 +287,7 @@ public class InternetConnection{
     			for(int x = 0; x < threadCount; x++){
     				//see if all threads are finished
     				if(bool[x] == false){
-    					System.out.println("not done yet, because of thread : " + x);
+    					//System.out.println("not done yet, because of thread : " + x);
     					julean = false;
     					break;
     				}

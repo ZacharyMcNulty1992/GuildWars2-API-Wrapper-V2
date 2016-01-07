@@ -19,6 +19,7 @@ public class GW2Parser extends Thread {
 	private int maxNum; //the max index that can be parsed
 	private boolean finished;
 	private boolean wait;
+	private boolean terminate;
 	
 	public GW2Parser(int maximum){
 		LON = new ArrayList<String>();
@@ -29,6 +30,7 @@ public class GW2Parser extends Thread {
 		count = 0;
 		finished = false;
 		wait = true;
+		terminate = false;
 		maxNum = maximum;
 	}
 	
@@ -39,12 +41,15 @@ public class GW2Parser extends Thread {
 			while (!finished){
 				checkForWait();
 				parseMap();
+				if(terminate)
+					break;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
 		System.out.println("Thread has finished");
+		
 	}
 	
 	protected void checkForWait(){
@@ -118,6 +123,9 @@ public class GW2Parser extends Thread {
 		resumeThread();
 	}
 	
+	public void terminateThread(){
+		terminate = true;
+	}
 	
 	/*
 	 * Getters

@@ -12,6 +12,7 @@ public class GW2ItemCollector implements Runnable {
 
 	private int minNum;
 	private int maxNum;
+	private int count; //test variable to see what we have parsed
 	private String itemURL;
 	private URL newItemURL;
 	private HashMap<String, Long> map;
@@ -24,6 +25,7 @@ public class GW2ItemCollector implements Runnable {
 	public GW2ItemCollector(int min, int max) {
 		minNum = min;
 		maxNum = max;
+		count = 0;
 		map = new HashMap<String, Long>();
 		ic = new InternetConnection();
 		itemURL = "https://api.guildwars2.com/v2/items";
@@ -42,6 +44,7 @@ public class GW2ItemCollector implements Runnable {
 		JSONArray a;
 		try {
 			for (int x = minNum; x <= maxNum; x++) {
+				count = x;
 				
 				// create the new url
 				itemURL = itemURL + "?page=" + x + "&page_size=200";
@@ -71,6 +74,8 @@ public class GW2ItemCollector implements Runnable {
 				}
 			}
 			
+			
+			
 			System.out.println("concating map");
 			concatMap();
 			
@@ -81,7 +86,9 @@ public class GW2ItemCollector implements Runnable {
 	}
 
 	protected void finished(){
+		System.out.println("last page parsed: " + count + " out of : " + maxNum);
 		finished = true;
+		Parser.terminateThread();
 	}
 	
 	public boolean getFinished(){
