@@ -43,7 +43,8 @@ public class GW2ItemCollector implements Runnable {
 
 		JSONArray a;
 			try{
-			for (int x = minNum; x <= maxNum; x++) {
+				int x = 0;
+			for (x = minNum; x <= maxNum; x++) {
 				
 				// create the new url
 				itemURL = itemURL + "?page=" + x + "&page_size=200";
