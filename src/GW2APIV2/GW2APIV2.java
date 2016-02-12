@@ -19,8 +19,8 @@ import java.net.URL;
  */
 public class GW2APIV2 {
 
-	// internet connection variables and class instances
-	private InternetConnection ic; // this class handles all the internet
+	// Internet connection variables and class instances
+	private InternetConnection ic; // this class handles all the Internet
 									// connection related methods
 	private String Standard_URL = "https://api.guildwars2.com/v2/"; // the root
 																	// url to
@@ -67,9 +67,7 @@ public class GW2APIV2 {
 	 */
 
 	protected GW2Accounts setUpAccount() {
-
 		try {
-
 			URL u = new URL("https://api.guildwars2.com/v2/tokeninfo");
 			URL accDetails = new URL("https://api.guildwars2.com/v2/account");
 
@@ -88,16 +86,19 @@ public class GW2APIV2 {
 				a.supplyCharacterList(charactersList);
 			}
 			if (a.inventoryPermission) {
-				URL bankDetails = new URL("https://api.guildwars2.com/v2/account/bank");
+				URL bankDetails = new URL(
+						"https://api.guildwars2.com/v2/account/bank");
 				JSONArray bankList = ic.getJsonArray(bankDetails);
 				a.supplyBankInfo(bankList);
 
-				URL MatsBankDetails = new URL("https://api.guildwars2.com/v2/account/materials");
+				URL MatsBankDetails = new URL(
+						"https://api.guildwars2.com/v2/account/materials");
 				JSONArray matsList = ic.getJsonArray(MatsBankDetails);
 				a.supplyMaterialsBank(matsList);
 			}
 			if (a.walletPermission) {
-				URL walletDetails = new URL("https://api.guildwars2.com/v2/account/wallet");
+				URL walletDetails = new URL(
+						"https://api.guildwars2.com/v2/account/wallet");
 
 				String money = "https://api.guildwars2.com/v2/currencies/";
 				URL moneyURL;
@@ -108,7 +109,8 @@ public class GW2APIV2 {
 				// initalize the currencies for the account associated with the
 				// apiKey
 				for (JSONObject b : walletList) {
-					money = "https://api.guildwars2.com/v2/currencies/" + b.get("id");
+					money = "https://api.guildwars2.com/v2/currencies/"
+							+ b.get("id");
 					moneyURL = new URL(money);
 					JSONObject x = ic.getJsonObj(moneyURL);
 
@@ -126,7 +128,6 @@ public class GW2APIV2 {
 
 				List<Long> dyeIdObj = (List) ic.getJsonArray(dyeURL);
 
-				List<Long> dyeIdList = new ArrayList<Long>();
 				List<GW2Dye> dyeList = new ArrayList<GW2Dye>();
 
 				// variables for getting the dyes from the color endpoint
@@ -161,50 +162,50 @@ public class GW2APIV2 {
 
 			}
 			if (a.pvpPermission) {
-				try {
-					// make the url for the pvp stats endpoint
-					URL pvpURL = new URL(Standard_URL + "pvp/stats");
 
-					// get a JSONObject that holds pvp stats
-					JSONObject pvpStats = ic.getJsonObj(pvpURL);
+				// make the url for the pvp stats endpoint
+				URL pvpURL = new URL(Standard_URL + "pvp/stats");
 
-					// make a url for the ids of pvp matches
-					pvpURL = new URL(Standard_URL + "pvp/games");
+				// get a JSONObject that holds pvp stats
+				JSONObject pvpStats = ic.getJsonObj(pvpURL);
 
-					// get and object with a list of games ids in it
-					List<String> pvpGames = (List) ic.getJsonObj(pvpURL);
+				// make a url for the ids of pvp matches
+				pvpURL = new URL(Standard_URL + "pvp/games");
 
-					// make an empty string and a variable for the number of game ids
-					String idList = "";
-					int size = pvpGames.size();
-					
-					//now make a comma seperated list of game ids
-					for (int x = 0; x < size; x++) {
-						if (x > 0)
-							idList += ", " + pvpGames.get(x);
-						else
-							idList += pvpGames.get(x);
-					}
-					
-					//make a new url for gtting the games by id
-					pvpURL = new URL(Standard_URL + "pvp/games?ids=" + idList);
-					
-					//now get a list of games
-					List<JSONObject> pvpGame = (List) ic.getJsonArray(pvpURL);
-					
-					a.supplyPvpInformation(pvpGame, pvpStats);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
+				// get and object with a list of games ids in it
+				List<String> pvpGames = (List) ic.getJsonObj(pvpURL);
+
+				// make an empty string and a variable for the number of game
+				// ids
+				String idList = "";
+				int size = pvpGames.size();
+
+				// now make a comma seperated list of game ids
+				for (int x = 0; x < size; x++) {
+					if (x > 0)
+						idList += ", " + pvpGames.get(x);
+					else
+						idList += pvpGames.get(x);
 				}
+
+				// make a new url for gtting the games by id
+				pvpURL = new URL(Standard_URL + "pvp/games?ids=" + idList);
+
+				// now get a list of games
+				List<JSONObject> pvpGame = (List) ic.getJsonArray(pvpURL);
+
+				a.supplyPvpInformation(pvpGame, pvpStats);
+
+				return a;
 			}
-
-			return a;
-
-		} catch (Exception e) {
+		} catch (MalformedURLException e) {
+			System.out.println("an exception has occured while making URLs");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out
+					.println("an error has occured while getting JSONObjects");
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 
@@ -304,53 +305,68 @@ public class GW2APIV2 {
 
 			return g;
 		} catch (MalformedURLException e) {
+			System.out
+					.println("an exception has occured while creating the URL to fetch item id's");
 			e.printStackTrace();
 		}
 		return null;
 	}
 
 	/*
-	 * getItems Params: none returns: a Map containing the names of items
-	 * indexed by their id throws: Malformed URL Exception and JSONException
+	 * getItems
+	 *  
+	 * Params: none 
+	 * returns: a Map containing the names of items
+	 * indexed by their id
 	 */
-	public HashMap<String, Long> getItems() throws IOException, ParseException, InterruptedException {
+	public HashMap<String, Long> getItems() throws IOException, ParseException,
+			InterruptedException {
 
 		HashMap<String, Long> listOfNames = ic.getMapOfNames();
 
 		return listOfNames;
 	}
-	
-	public HashMap<String, Long> getItemsST(){
-		try{
-			HashMap<String, Long> a = ic.getItemsST();
-			
-			return a;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
+
+	/*
+	 * getItemsST 
+	 * 
+	 * Params: none
+	 * Returns: HashMap (Keys: names of items, Values: item ids)
+	 */
+	public HashMap<String, Long> getItemsST() {
+
+		HashMap<String, Long> a = ic.getItemsST();
+
+		return a;
+
+	}
+	/*
+	 * getListOfItemIds
+	 * 
+	 * Params: none
+	 * Returns: List of item ids represented as Longs
+	 */
+	public List<Long> getListOfItemIDs() {
+
+			JSONArray array;
+			try {
+				array = ic.getJsonArray(new URL(Standard_URL + "items/"));
+
+				List<Long> a = (List) array;
+
+				return a;
+				
+			} catch (MalformedURLException e) {
+				System.out.println("an error occured in creating URL to get the list of item ids");
+				e.printStackTrace();
+			} catch (IOException e) {
+				System.out.println("an error has occured while fetching the JSONArray");
+				e.printStackTrace();
+			}
+
 		return null;
 	}
-	
-	public List<Long> getListOfItemIDs(){
-		
-		try{
-			
-			JSONArray array = ic.getJsonArray(new URL(Standard_URL + "items/"));
-			
-			List<Long> a = (List) array;
-			
-			return a;
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	
+
 	/*
 	 * getXItems Params: the paging index (a number between 0 and 228), the
 	 * number of objects on each page (MAX: 200) Returns: a list of 200 items
@@ -431,22 +447,25 @@ public class GW2APIV2 {
 			itemList.add(g);
 
 		}
-
-		System.out.println("returning the list");
+		
 		return itemList;
 	}
 
 	/*
-	 * getIcon Params: a valid icon Url in a string format Returns: an image in
+	 * getIcon PNG
+	 * 
+	 * Params: a valid icon Url in a string format Returns: an image in
 	 * png format
 	 */
 	public Image getIconPNG(String iconURL) {
 
 		return ic.getIconPNG(iconURL);
 	}
-	
+
 	/*
-	 * getIcon Params: a valid icon Url in a string format Returns: an image in
+	 * getIconJPG 
+	 * 
+	 * Params: a valid icon Url in a string format Returns: an image in
 	 * jpg format
 	 */
 	public Object getIconJPG(String iconURL) {
@@ -454,15 +473,16 @@ public class GW2APIV2 {
 		return ic.getIconJPG(iconURL);
 	}
 
-	
 	/********************
 	 * Account Methods * API KEY NEEDED * FOR MOST METHODS*
 	 ********************/
 
 	/*
-	 * getAccount Params: none Returns: an instance of the GW2Accounts class
-	 * which is fully instanciated Throws: RuntimeException if an apiKey was not
-	 * supplied on the creation of this class
+	 * getAccount 
+	 * 
+	 * Params: none 
+	 * Returns: an instance of the GW2Accounts class which is fully instanciated 
+	 * Throws: RuntimeException if an apiKey was not supplied on the creation of this class
 	 */
 
 	public GW2Accounts getAccount() {
@@ -475,7 +495,10 @@ public class GW2APIV2 {
 	}
 
 	/*
-	 * getTrait Params: a Trait id Returns: a trait object
+	 * getTrait 
+	 * 
+	 * Params: a Trait id 
+	 * Returns: a trait object
 	 */
 	public GW2Trait getTrait(Long id) {
 		return ic.getTrait(id);
@@ -489,6 +512,12 @@ public class GW2APIV2 {
 	 * Trading Post Methods * API KEY Optional *
 	 *************************/
 
+	/*
+	 * GW2TradingPost
+	 * 
+	 * Params: none
+	 * Returns: a trading post Object used for accessing trading post specific endpoints
+	 */
 	public GW2TradingPost getTradingPost() {
 
 		if (apiKey != null)
