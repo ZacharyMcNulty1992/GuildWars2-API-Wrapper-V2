@@ -28,11 +28,25 @@ public class GW2BankItem {
 		infusions = (List) a.get("infusions");
 	}
 	
+	/*
+	 * Getters
+	 */
+	
 	public List getUpgrades(){
 		return upgrades;
 	}
 	
 	public List getInfusions(){
 		return infusions;
+	}
+	
+	public Long getID(){
+		return id;
+	}
+	public Long getCount(){
+		return count;
+	}
+	public Long getSkin(){
+		return skin;
 	}
 }

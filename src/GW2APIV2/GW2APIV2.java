@@ -146,7 +146,7 @@ public class GW2APIV2 {
 				}
 
 				List<Long> skinIdObject = (List) ic.getJsonArray(skinURL);
-				List<GW2Skin> skinsList = new ArrayList();
+				List<GW2Skin> skinsList = new ArrayList<GW2Skin>();
 				URL skinsURL = new URL(Standard_URL + "skins/");
 
 				for (Long id : skinIdObject) {

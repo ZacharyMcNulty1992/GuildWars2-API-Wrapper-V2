@@ -56,7 +56,8 @@ public class GW2Specialization {
 				major_trait.add(new GW2Trait(bob));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("error is adding Trait in specialization: " + this.name);
+			//e.printStackTrace();
 		}
 	}
 

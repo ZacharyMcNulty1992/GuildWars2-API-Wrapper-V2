@@ -30,7 +30,6 @@ import javax.net.ssl.SSLContext;
 public class InternetConnection{
 
 
-    private GW2Parser parser [];
     private JSONParser JsonParser;
     private JSONObject obj;
     private JSONArray jArray;
@@ -49,6 +48,8 @@ public class InternetConnection{
     
     /*
      * Default Constructor
+     * 
+     * NOTE: This Constructor prevents access to endpoints that require an API key
      */
     public InternetConnection(){
     	

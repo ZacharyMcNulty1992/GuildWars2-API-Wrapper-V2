@@ -15,4 +15,19 @@ public class GW2BankedMaterial {
 		count = (Long) a.get("count");
 	}
 	
+	/*
+	 * Getters
+	 */
+	
+	public Long getID(){
+		return id;
+	}
+	
+	public Long getCategory(){
+		return category;
+	}
+	
+	public Long getCount(){
+		return count;
+	}
 }

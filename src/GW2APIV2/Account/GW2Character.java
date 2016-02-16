@@ -24,19 +24,15 @@ public class GW2Character {
 	private Long deaths; // number of deaths on this character
 	private List<GW2Item> bags; // items in characters bags
 	private List<GW2Item> equips; // items currently equipped on character
-	private List<CraftingDiscipline> crafting; // all crafting disciplines on
-												// this character
+	private List<CraftingDiscipline> crafting; // all crafting disciplines on this character
 
-	private List<GW2Specialization> pvp_spec; // the characters pvp
-												// specialization
-	private List<GW2Specialization> pve_spec; // the characters pve
-												// specialization
-	private List<GW2Specialization> wvw_spec; // the characters wvw
-												// specialization
+	private List<GW2Specialization> pvp_spec; // the characters pvp specialization
+	private List<GW2Specialization> pve_spec; // the characters pve specialization
+	private List<GW2Specialization> wvw_spec; // the characters wvw specialization
 
 	protected InternetConnection ic; // internet connection class for obtaining
-										// character information from character
-										// endpoints
+										// character information from character endpoints
+	
 	protected String standardURL; // url for character endpoints
 	protected boolean bp; // bag permissions
 	protected boolean buildPermission;

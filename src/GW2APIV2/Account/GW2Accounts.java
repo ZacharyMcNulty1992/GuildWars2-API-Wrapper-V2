@@ -135,7 +135,7 @@ public class GW2Accounts {
 			}
 			
 		}catch(Exception e){
-			e.printStackTrace();
+			System.out.println("error in parsing acccount permissions");
 		}
 		
 	}
@@ -149,6 +149,7 @@ public class GW2Accounts {
 	 * setters
 	 * 
 	 * supply information to this class for later ease of use
+	 * These all supply information to this class
 	 */
 	
 	public void supplyAccountTokenInfo(JSONObject a){
