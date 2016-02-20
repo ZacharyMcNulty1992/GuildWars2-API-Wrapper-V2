@@ -5,7 +5,9 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
 import GW2APIV2.Account.GW2Trait;
+
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +22,9 @@ import java.security.KeyStore;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import javax.imageio.ImageIO;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -43,6 +48,7 @@ public class InternetConnection{
     private String itemURL;
     private String TokenInfoURL;
     private Thread p[];
+    private ThreadPoolExecutor threadPool;
     
     public boolean apiKeySupplied;
     
@@ -133,6 +139,8 @@ public class InternetConnection{
             return new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
 
         }catch(IOException e){
+        	System.out.println("Error in retrieving information from");
+        	System.out.println(u.toString());
             e.printStackTrace();
         }
         return new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
@@ -226,17 +234,19 @@ public class InternetConnection{
     @SuppressWarnings("unchecked")
 	public HashMap<String, Long> getMapOfNames() throws IOException, ParseException, InterruptedException{  
 
-    	try{
+    	
     		//the number of threads used to collect item data
     		//sine our max number of pages is 259 then we can have 
     		//either 7 threads or 37 threads
-    		//since we dont care about overhead right now we will use 37
+    		//since we don't care about overhead right now we will use 37
     		int threadCount = 37; //thus our range will be 7 pages per thread
     		
-    		Thread thread[] = new Thread[threadCount];
+    		//Thread thread[] = new Thread[threadCount];
     		
-    		//207 is the number of pages in the pagnation system
-    		// 4 is the number of threads
+    		//useing an executor here to handle runaway thread caused by this method
+    		threadPool = new ScheduledThreadPoolExecutor(threadCount);
+    		
+    		//259 is the number of pages in the pagnation system
     		int range = 259/threadCount;
     		int min; //the lowest page number to parse at that thread
     		int max; //the highest page number to parse at that thread
@@ -245,10 +255,9 @@ public class InternetConnection{
     		
     		//init the collector objects and give their ranges to
     		for(int y = 0; y < threadCount; y++){
-    			//System.out.println("creating thread number : " + y);
+    			
     			//these next few lines get the page for the thread to start at (min)
     			//and the page for the thread to stop at (max)
-    			
     			if(y == 0)
     				min = base;
     			else
@@ -260,13 +269,15 @@ public class InternetConnection{
     				max = 259;
 
     			collect[y] = new GW2ItemCollector(min, max);
-    			System.out.println("Thread: " + y + "\tMin: " + min + "\tMax: " + max);
+    			//System.out.println("Thread: " + y + "\tMin: " + min + "\tMax: " + max);
     		}
     		
     		//starts all the threads
     		for(int x = 0; x < threadCount; x++){
-    			thread[x] = new Thread(collect[x]);
-    			thread[x].start();	
+    			System.out.println("executing collector number: " + x);
+    			threadPool.execute(collect[x]); 
+    			//thread = new Thread(collect[x]);
+    			//thread[x].start();	
     		}
     	
     		System.out.println("threads started");
@@ -319,15 +330,10 @@ public class InternetConnection{
 	    		
 	    	}
 			
+	    	//terminate the currently running thread pool 
+	    	threadPool.shutdownNow();
+	    	
 			return map;
-        	
-    		
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	
-    	//if we get here there's a problem
-		return null;
     }
     
     //get a map of items with their names and id but single hreaded

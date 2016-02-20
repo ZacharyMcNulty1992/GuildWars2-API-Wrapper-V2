@@ -31,6 +31,7 @@ public class GW2Parser extends Thread {
 		wait = true;
 		terminate = false;
 		maxNum = maximum;
+		System.out.println("parser at range " + maximum);
 	}
 
 	public void run() {
@@ -92,6 +93,7 @@ public class GW2Parser extends Thread {
 					count = o.size();
 
 			}
+			System.out.println("parsed items at page " + currentIndex);
 			// current index has been parsed now moving to the next one
 			currentIndex++;
 		}

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ public class GW2ItemCollector implements Runnable {
 	private GW2Parser Parser;
 	private List<JSONObject> g;
 	private Thread p;
+	private ScheduledThreadPoolExecutor threadPool;
 
 	public GW2ItemCollector(int min, int max) {
 		minNum = min;
@@ -31,17 +33,22 @@ public class GW2ItemCollector implements Runnable {
 		itemURL = "https://api.guildwars2.com/v2/items";
 		finished = false;
 		Parser = new GW2Parser(max);
-		p = new Thread(Parser);
-		p.start();
+		threadPool = new ScheduledThreadPoolExecutor(1);
+		threadPool.execute(Parser); //start the parser thread
+		//p = new Thread(Parser);
+		//p.start();
 	}
 
+	@Override
 	public void run() {
+		System.out.println("starting item collector at range" + minNum + " - " + maxNum);
 		parse();
+		
 	}
 
 	public void parse() {
 
-		JSONArray a;
+		JSONArray a; //holds the currently returned set of JSONObjects
 			try{
 				int x = 0;
 			for (x = minNum; x <= maxNum; x++) {
@@ -69,6 +76,7 @@ public class GW2ItemCollector implements Runnable {
 				Thread.sleep(2000);
 				if(Parser.finishedProcessing()){
 					finished();
+					threadPool.shutdownNow();
 					break;
 				}
 			}
