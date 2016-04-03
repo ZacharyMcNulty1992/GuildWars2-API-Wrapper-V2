@@ -132,18 +132,20 @@ public class InternetConnection{
             urlConnection = (HttpsURLConnection) u.openConnection();
             
             if(apiKey != null)
-            	urlConnection.setRequestProperty("Authorization: ", "Bearer " + apiKey);
+            	urlConnection.setRequestProperty("Authorization ", ("Bearer " + apiKey));
             
             urlConnection.setSSLSocketFactory(SocketFactory.getSocketFactory());
             
-            return new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
+            BufferedReader bfr =  new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
+            
+            return bfr;
 
         }catch(IOException e){
         	System.out.println("Error in retrieving information from");
         	System.out.println(u.toString());
             e.printStackTrace();
         }
-        return new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), Charset.forName("UTF-8")));
+        return null;
     }
 
     //used only in conjunction with the render service
@@ -183,7 +185,8 @@ public class InternetConnection{
     public JSONObject getJsonObj(URL u){
 
         try{
-            obj = (JSONObject) JsonParser.parse(getContent(u));
+        	BufferedReader bfr = getContent(u);
+            obj = (JSONObject) JsonParser.parse(bfr);
             return obj;
         }catch(Exception e){
             e.printStackTrace();
@@ -201,7 +204,8 @@ public class InternetConnection{
     
     public JSONArray getJsonArray(URL u)throws IOException{
         try{
-            jArray = (JSONArray) JsonParser.parse(getContent(u));
+        	BufferedReader bfr = getContent(u);
+            jArray = (JSONArray) JsonParser.parse(bfr);
             return jArray;
         }catch(Exception e){
             e.printStackTrace();
@@ -236,18 +240,18 @@ public class InternetConnection{
 
     	
     		//the number of threads used to collect item data
-    		//sine our max number of pages is 259 then we can have 
+    		//sine our max number of pages is 267.7 then we can have 
     		//either 7 threads or 37 threads
     		//since we don't care about overhead right now we will use 37
-    		int threadCount = 37; //thus our range will be 7 pages per thread
+    		int threadCount = 34; //thus our range will be 7 pages per thread
     		
     		//Thread thread[] = new Thread[threadCount];
     		
     		//useing an executor here to handle runaway thread caused by this method
     		threadPool = new ScheduledThreadPoolExecutor(threadCount);
     		
-    		//259 is the number of pages in the pagnation system
-    		int range = 259/threadCount;
+    		//268 is the number of pages in the pagnation system
+    		int range = 268/threadCount;
     		int min; //the lowest page number to parse at that thread
     		int max; //the highest page number to parse at that thread
     		int base = 0;

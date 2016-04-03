@@ -35,7 +35,7 @@ public class GW2Parser extends Thread {
 	}
 
 	public void run() {
-
+		//System.out.println("Line 38: parser running on thread " + Thread.currentThread().getName());
 		// each iteration will look for if it should wait
 		while (!finished) {
 			try {

@@ -29,19 +29,21 @@ public class GW2ItemCollector implements Runnable {
 		minNum = min;
 		maxNum = max;
 		map = new HashMap<String, Long>();
-		ic = new InternetConnection();
+		this.ic = new InternetConnection();
 		itemURL = "https://api.guildwars2.com/v2/items";
 		finished = false;
 		Parser = new GW2Parser(max);
 		threadPool = new ScheduledThreadPoolExecutor(1);
-		threadPool.execute(Parser); //start the parser thread
+		
 		//p = new Thread(Parser);
 		//p.start();
 	}
-
+	
 	@Override
 	public void run() {
-		System.out.println("starting item collector at range" + minNum + " - " + maxNum);
+		//System.out.println("starting item collector at range" + minNum + " - " + maxNum);
+		//System.out.println("starting parser");
+		threadPool.execute(Parser); //start the parser thread
 		parse();
 		
 	}
@@ -60,7 +62,7 @@ public class GW2ItemCollector implements Runnable {
 				// get the JSONObject
 				a = ic.getJsonArray(newItemURL);
 
-				// get the list of JSONObjects
+				// get the list of JSONObjects from the JSONArray we just got
 				g = (List<JSONObject>) a;
 				
 				//supply a list to the parser
